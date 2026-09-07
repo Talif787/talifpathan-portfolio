@@ -1,0 +1,480 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   DESIGN TOKENS
+   One source of truth for colour, type, space, elevation and motion.
+   Native cascade layers (@layer tokens, app) were evaluated and rejected:
+   Tailwind 3's @layer directive shadows the native at-rule and errors on any
+   layer name other than base/components/utilities. Tailwind's own layering is
+   the project's real cascade architecture, so we use it rather than fight it.
+   ========================================================================= */
+
+@layer base {
+  :root {
+    color-scheme: dark;
+
+    /* Surfaces: ink-blue, not tinted black. Each step is a real elevation. */
+    --c-base: #0c141f;
+    --c-base-deep: #08101a;
+    --c-surface: #121d2b;
+    --c-surface-raised: #18263a;
+    --c-surface-glass: rgb(18 29 43 / 0.72);
+    --c-scrim: rgb(8 16 26 / 0.82);
+
+    /* Hairlines. Three weights, used to encode hierarchy not decoration. */
+    --c-line-faint: rgb(148 168 196 / 0.09);
+    --c-line: rgb(148 168 196 / 0.16);
+    --c-line-strong: rgb(148 168 196 / 0.28);
+
+    /* Text */
+    --c-text: #e6ecf5;
+    --c-text-muted: #8c9cb3;
+    --c-text-faint: #5d6b80;
+
+    /* One accent. Warm amber against cool ink: instrumentation, not neon. */
+    --c-accent: #f2b25c;
+    --c-accent-quiet: rgb(242 178 92 / 0.14);
+    --c-accent-line: rgb(242 178 92 / 0.42);
+    /* Second signal, used only inside architecture diagrams to mark the
+       durable end of a path. Never used for chrome. */
+    --c-signal: #6fbfb4;
+
+    /* Semantic states */
+    --c-ok: #6fbfb4;
+    --c-warn: #f2b25c;
+    --c-error: #e08076;
+
+    /* Fluid type scale, 1.2 at 360px rising to 1.25 at 1440px */
+    --step--2: clamp(0.694rem, 0.681rem + 0.06vw, 0.75rem);
+    --step--1: clamp(0.833rem, 0.808rem + 0.11vw, 0.938rem);
+    --step-0: clamp(1rem, 0.964rem + 0.16vw, 1.125rem);
+    --step-1: clamp(1.2rem, 1.142rem + 0.26vw, 1.406rem);
+    --step-2: clamp(1.44rem, 1.351rem + 0.4vw, 1.758rem);
+    --step-3: clamp(1.728rem, 1.596rem + 0.59vw, 2.197rem);
+    --step-4: clamp(2.074rem, 1.881rem + 0.86vw, 2.746rem);
+    --step-5: clamp(2.488rem, 2.209rem + 1.24vw, 3.433rem);
+    --step-6: clamp(2.75rem, 1.86rem + 3.95vw, 5.25rem);
+
+    /* Space */
+    --space-2xs: 0.25rem;
+    --space-xs: 0.5rem;
+    --space-s: 0.75rem;
+    --space-m: 1rem;
+    --space-l: 1.5rem;
+    --space-xl: 2.5rem;
+    --space-2xl: 4rem;
+    --section-y: clamp(4.5rem, 3rem + 7vw, 9rem);
+    --gutter: clamp(1.25rem, 0.9rem + 1.7vw, 2.5rem);
+    --measure: 68ch;
+
+    /* Radii, differentiated by role rather than one value everywhere */
+    --r-inline: 5px;
+    --r-node: 9px;
+    --r-sheet: 14px;
+    --r-panel: 18px;
+    --r-chip: 999px;
+
+    /* Elevation */
+    --shadow-sheet: 0 1px 2px rgb(4 8 14 / 0.4);
+    --shadow-lift: 0 12px 28px -14px rgb(4 8 14 / 0.85);
+    --shadow-panel: 0 32px 64px -24px rgb(2 5 10 / 0.9);
+
+    /* ---- Motion system -----------------------------------------------
+       Durations are graded by interaction class. Anything the pointer
+       touches resolves inside 200ms; anything that moves layout is allowed
+       longer because the user needs to follow it.                         */
+    --dur-micro: 110ms;   /* icon nudge, colour shift */
+    --dur-press: 90ms;    /* button depress */
+    --dur-ui: 180ms;      /* hover, focus ring, chip */
+    --dur-card: 300ms;    /* card lift, metadata reveal */
+    --dur-panel: 420ms;   /* disclosure, dialog */
+    --dur-scene: 700ms;   /* one-time entrance */
+
+    /* Entrance decelerates hard, exit accelerates away: different curves so
+       appearing and disappearing do not feel like the same event reversed. */
+    --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-exit: cubic-bezier(0.5, 0, 0.75, 0);
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --ease-emphasis: linear(
+      0, 0.402 7.4%, 0.711 15.3%, 0.929 23.7%, 1.008 28.2%, 1.067 33.1%,
+      1.099 38.6%, 1.104 43.6%, 1.09 49.4%, 1.023 68.1%, 0.999 85.4%, 1
+    );
+
+    --header-h: 3.75rem;
+  }
+
+  * {
+    border-color: var(--c-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Keep anchored sections clear of the sticky header. */
+    scroll-padding-block-start: calc(var(--header-h) + 1.5rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--c-base);
+    color: var(--c-text);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    /* Atmosphere: two very low-contrast radials, no floating blobs. */
+    background-image:
+      radial-gradient(80rem 40rem at 78% -10%, rgb(242 178 92 / 0.045), transparent 60%),
+      radial-gradient(60rem 36rem at 4% 8%, rgb(111 191 180 / 0.035), transparent 62%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 500;
+    letter-spacing: -0.022em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 3px;
+    border-radius: var(--r-inline);
+  }
+
+  /* Never rely on the default outline being removed silently. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background: var(--c-accent-quiet);
+    color: var(--c-text);
+  }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--c-base-deep); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--c-surface-raised);
+    border-radius: var(--r-chip);
+    border: 2px solid var(--c-base-deep);
+  }
+}
+
+@layer components {
+  /* ---- Layout primitives ------------------------------------------------ */
+  .shell {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* Sections below the fold skip rendering work until they approach the
+     viewport. The intrinsic size keeps the scrollbar honest. */
+  .section-defer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 40rem;
+  }
+
+  /* ---- Surfaces --------------------------------------------------------- */
+  .sheet {
+    background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-base) 130%);
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-sheet);
+    box-shadow: var(--shadow-sheet);
+  }
+
+  /* Glass is reserved for chrome that floats over content: the header and the
+     command palette. Nothing in the document flow is translucent. */
+  .glass {
+    background: var(--c-surface-glass);
+    border: 1px solid var(--c-line);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass { background: var(--c-surface); }
+  }
+
+  /* ---- Section header rail ---------------------------------------------- */
+  .rail {
+    display: grid;
+    gap: var(--space-l);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 60rem) {
+    .rail { grid-template-columns: 16rem minmax(0, 1fr); gap: var(--space-2xl); }
+  }
+
+  .rail-mark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--1);
+    color: var(--c-text-faint);
+  }
+  .rail-mark::before {
+    content: "";
+    inline-size: 1.75rem;
+    block-size: 1px;
+    background: var(--c-accent-line);
+    translate: 0 -0.3em;
+  }
+
+  /* ---- Chips ------------------------------------------------------------ */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.625rem;
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-chip);
+    background: var(--c-base-deep);
+    color: var(--c-text-muted);
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--2);
+    line-height: 1.5;
+    white-space: nowrap;
+    transition:
+      border-color var(--dur-ui) var(--ease-standard),
+      color var(--dur-ui) var(--ease-standard);
+  }
+  .chip:where(:hover) {
+    border-color: var(--c-line-strong);
+    color: var(--c-text);
+  }
+
+  /* ---- Architecture diagram ---------------------------------------------
+     The one recurring motion idea on this site: a pulse travelling along a
+     hairline path, standing in for a request moving through a system. It is
+     pure CSS, runs on the compositor, and is switched off entirely under
+     reduced motion. Node labels come from content/projects.ts, so the diagram
+     can never claim architecture the project does not have.               */
+  .flow {
+    container-type: inline-size;
+    container-name: flow;
+    position: relative;
+  }
+
+  .flow-track {
+    display: grid;
+    gap: var(--space-s);
+    grid-auto-flow: row;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  @container flow (min-width: 34rem) {
+    .flow-track {
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+      align-items: stretch;
+    }
+  }
+
+  .flow-node {
+    position: relative;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid var(--c-line);
+    border-radius: var(--r-node);
+    background: var(--c-base-deep);
+    min-inline-size: 0;
+  }
+  .flow-node[data-kind="data"] { border-color: rgb(111 191 180 / 0.34); }
+  .flow-node[data-kind="transport"] { border-color: var(--c-accent-line); }
+
+  .flow-node-label {
+    display: block;
+    font-size: var(--step--1);
+    color: var(--c-text);
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+  .flow-node-detail {
+    display: block;
+    margin-block-start: 0.125rem;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--step--2);
+    color: var(--c-text-faint);
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  /* Connector between nodes. Vertical when stacked, horizontal when inline. */
+  .flow-link {
+    position: relative;
+    display: block;
+    justify-self: center;
+    inline-size: 1px;
+    block-size: 1rem;
+    background: var(--c-line);
+    overflow: hidden;
+  }
+  @container flow (min-width: 34rem) {
+    .flow-link {
+      align-self: center;
+      inline-size: 100%;
+      block-size: 1px;
+      max-inline-size: 2.5rem;
+    }
+  }
+
+  .flow-link::after {
+    content: "";
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 45%;
+    background: linear-gradient(180deg, transparent, var(--c-accent));
+    animation: flow-down 2.6s var(--ease-standard) infinite;
+    animation-delay: calc(var(--flow-index, 0) * 260ms);
+  }
+  @container flow (min-width: 34rem) {
+    .flow-link::after {
+      inline-size: 45%;
+      block-size: 100%;
+      background: linear-gradient(90deg, transparent, var(--c-accent));
+      animation-name: flow-right;
+    }
+  }
+
+  @keyframes flow-down {
+    0%   { transform: translateY(-120%); opacity: 0; }
+    35%  { opacity: 1; }
+    100% { transform: translateY(240%); opacity: 0; }
+  }
+  @keyframes flow-right {
+    0%   { transform: translateX(-120%); opacity: 0; }
+    35%  { opacity: 1; }
+    100% { transform: translateX(240%); opacity: 0; }
+  }
+
+  /* ---- Scroll progress ---------------------------------------------------
+     Native scroll-driven animation. Zero JavaScript, zero scroll listeners.
+     Hidden entirely where unsupported rather than shipping a JS fallback for
+     a purely decorative affordance.                                        */
+  .scroll-progress { display: none; }
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      display: block;
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      block-size: 2px;
+      z-index: 60;
+      transform-origin: 0 50%;
+      background: linear-gradient(90deg, var(--c-accent), var(--c-signal));
+      animation: progress-scale linear both;
+      animation-timeline: scroll(root block);
+    }
+    @keyframes progress-scale {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+  }
+
+  /* ---- Link with an underline that grows from the origin ---------------- */
+  .link-underline {
+    position: relative;
+    color: var(--c-text);
+    text-decoration: none;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    inset-block-end: -2px;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 1px;
+    background: var(--c-accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform var(--dur-ui) var(--ease-standard);
+  }
+  .link-underline:where(:hover, :focus-visible)::after { transform: scaleX(1); }
+
+
+  /* ---- Section entrance --------------------------------------------------
+     One fade and 14px of rise, resolved against the view timeline so it needs
+     no JavaScript. Elements are visible by default; the animation only ever
+     runs where the browser supports it, so an unsupported browser shows the
+     finished state rather than blank space.                                */
+  .reveal { opacity: 1; }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        animation: reveal-in linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 26%;
+      }
+      @keyframes reveal-in {
+        from { opacity: 0; transform: translateY(14px); }
+        to   { opacity: 1; transform: none; }
+      }
+    }
+  }
+
+  /* ---- Hero entrance -----------------------------------------------------
+     The single orchestrated moment on the page. Each child declares its own
+     index and inherits one shared curve, so the sequence stays coherent
+     without a JavaScript stagger.                                          */
+  .enter-seq > * {
+    animation: enter-rise var(--dur-scene) var(--ease-entrance) both;
+    animation-delay: calc(var(--i, 0) * 70ms + 60ms);
+  }
+  @keyframes enter-rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .enter-seq > * { animation: none; }
+  }
+
+  /* ---- Prose measure ---------------------------------------------------- */
+  .measure { max-inline-size: var(--measure); }
+  .measure-tight { max-inline-size: 46ch; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .mono {
+    font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+    font-feature-settings: "ss01" on;
+  }
+  /* Applied only to elements that are mid-transform, never left on. */
+  .will-lift { will-change: transform; }
+}
+
+/* ============================================================================
+   REDUCED MOTION
+   Decorative movement is removed; state changes still resolve, just instantly.
+   Nothing is hidden, and no information is lost.
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-micro: 1ms;
+    --dur-press: 1ms;
+    --dur-ui: 1ms;
+    --dur-card: 1ms;
+    --dur-panel: 1ms;
+    --dur-scene: 1ms;
+  }
+
+  html { scroll-behavior: auto; }
+
+  .flow-link::after { animation: none; opacity: 0.55; transform: none; }
+  .scroll-progress { animation: none; transform: scaleX(1); opacity: 0.35; }
+
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
