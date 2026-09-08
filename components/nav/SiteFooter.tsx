@@ -1,4 +1,4 @@
-import { navItems, profile } from "@/content";
+import { navItems, profile, secondaryNavItems } from "@/content";
 import { Container } from "@/components/primitives/Container";
 import { SocialLinks } from "@/components/sections/SocialLinks";
 
@@ -15,7 +15,7 @@ export function SiteFooter() {
           </div>
 
           <nav aria-label="Footer" className="flex flex-wrap gap-x-l gap-y-xs">
-            {navItems.map((item) => (
+            {[...navItems, ...secondaryNavItems].map((item) => (
               <a
                 key={item.sectionId}
                 href={item.href}
@@ -30,10 +30,10 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-xl flex flex-col gap-xs border-t border-line-faint pt-l md:flex-row md:items-center md:justify-between">
-          <p className="text-2xs mono text-faint">
+          <p className="mono text-2xs text-faint">
             {year} {profile.name}
           </p>
-          <p className="text-2xs mono text-faint">
+          <p className="mono text-2xs text-faint">
             Built with Next.js, Tailwind CSS and Motion
           </p>
         </div>

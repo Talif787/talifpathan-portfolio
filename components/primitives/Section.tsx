@@ -47,11 +47,11 @@ export function Section({
               {aside}
             </div>
             <div>
-              <h2 id={headingId} className="text-3xl measure-tight">
+              <h2 id={headingId} className="measure-tight text-3xl">
                 {title}
               </h2>
               {intro ? (
-                <p className="mt-l measure text-muted text-lg">{intro}</p>
+                <p className="measure mt-l text-lg text-muted">{intro}</p>
               ) : null}
             </div>
           </div>

@@ -2,10 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 
 import "./globals.css";
-import { profile, education } from "@/content";
+import { profile, degrees } from "@/content";
 import { SiteHeader } from "@/components/nav/SiteHeader";
 import { SiteFooter } from "@/components/nav/SiteFooter";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import { ScrollToTop } from "@/components/motion/ScrollToTop";
 
 /**
  * Space Grotesk carries the page: geometric enough to read as engineered,
@@ -28,7 +29,7 @@ const mono = IBM_Plex_Mono({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const description = `${profile.role} working on real-time collaboration, distributed systems and AWS cloud engineering. Nearly four years at Capgemini, currently completing an MS in Computer Science at Northeastern University.`;
+const description = `${profile.role} working on distributed systems, real-time backends, AWS cloud engineering and applied LLM systems. Three years and nine months at Capgemini, now completing an MS in Computer Science at Northeastern University.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -39,9 +40,12 @@ export const metadata: Metadata = {
   description,
   keywords: [
     "software engineer",
-    "real-time systems",
     "distributed systems",
+    "real-time systems",
     "AWS",
+    "Raft consensus",
+    "RAG",
+    "LangChain",
     "Next.js",
     "Boston",
   ],
@@ -77,12 +81,18 @@ export const viewport: Viewport = {
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: profile.name,
+  name: profile.fullName,
+  alternateName: profile.name,
   jobTitle: profile.role,
+  homeLocation: { "@type": "Place", name: profile.location },
+  knowsLanguage: profile.spokenLanguages,
   description,
   email: `mailto:${profile.emails.personal}`,
   url: siteUrl,
-  alumniOf: { "@type": "CollegeOrUniversity", name: education.institution },
+  alumniOf: degrees.map((degree) => ({
+    "@type": "CollegeOrUniversity",
+    name: degree.institution,
+  })),
   sameAs: profile.socials
     .filter((social) => social.icon !== "mail")
     .map((social) => social.href),
@@ -99,6 +109,7 @@ export default function RootLayout({
         <div id="scroll-sentinel" aria-hidden className="absolute top-0 h-px w-px" />
         <main id="main">{children}</main>
         <SiteFooter />
+        <ScrollToTop />
         <script
           type="application/ld+json"
           // Serialised from a local object literal, never from user input.

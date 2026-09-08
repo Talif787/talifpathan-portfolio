@@ -11,7 +11,7 @@ import { CommandMenu } from "./CommandMenu";
 /**
  * The header carries three pieces of state:
  *  - scrolled: switches the bar from transparent to a glass surface
- *  - active section: tracked with IntersectionObserver, not a scroll listener
+ *  - active section: computed from live section geometry once per frame
  *  - command menu open
  *
  * The active indicator is a single element moved between links with a shared
@@ -36,25 +36,70 @@ export function SiteHeader() {
     return () => observer.disconnect();
   }, []);
 
+  /**
+   * Active section, computed from live geometry.
+   *
+   * This deliberately does not use IntersectionObserver, which the first
+   * version did and got wrong three ways:
+   *
+   *  1. The callback receives only the sections whose intersection *changed*,
+   *     so picking a winner from that batch decided the active section from a
+   *     partial view of the page instead of its whole current state.
+   *  2. `intersectionRatio` is a fraction of the target's own height. Against a
+   *     narrow rootMargin band, a very tall section scores near zero while a
+   *     short one fully inside the band scores 1, so tall sections always lost.
+   *  3. With thresholds above zero, a section taller than the band can never
+   *     reach them, so it never reported as intersecting at all.
+   *
+   * Reading `getBoundingClientRect` for the handful of nav sections once per
+   * animation frame is both cheaper to reason about and immune to the
+   * `content-visibility: auto` reflows that happen as sections below the fold
+   * render for the first time and grow past their intrinsic-size placeholder.
+   */
   useEffect(() => {
     const sections = navItems
       .map((item) => document.getElementById(item.sectionId))
-      .filter((element): element is HTMLElement => element !== null);
+      .filter((element): element is HTMLElement => element !== null)
+      .sort((a, b) => a.offsetTop - b.offsetTop);
 
     if (sections.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
-      },
-      { rootMargin: "-25% 0px -55% 0px", threshold: [0.1, 0.5, 1] },
-    );
+    let frame = 0;
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    const compute = () => {
+      frame = 0;
+      const header = document.querySelector("header")?.offsetHeight ?? 0;
+      // The line the reader is actually reading at: just under the header.
+      const readingLine = header + window.innerHeight * 0.28;
+
+      let current = sections[0].id;
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top - readingLine > 0) break;
+        current = section.id;
+      }
+
+      // At the foot of the page the last section wins even if its top sits
+      // below the reading line, so the final nav item can always light up.
+      const atBottom =
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom) current = sections[sections.length - 1].id;
+
+      setActive((previous) => (previous === current ? previous : current));
+    };
+
+    const schedule = () => {
+      if (frame === 0) frame = requestAnimationFrame(compute);
+    };
+
+    compute();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      if (frame !== 0) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
   }, []);
 
   return (
@@ -85,7 +130,7 @@ export function SiteHeader() {
         >
           <a
             href="#top"
-            className="rounded-inline text-xs mono tracking-tight text-ink"
+            className="mono rounded-inline text-xs tracking-tight text-ink"
           >
             {profile.name}
           </a>
@@ -134,7 +179,7 @@ export function SiteHeader() {
           >
             <Command aria-hidden className="size-3.5" />
             <span className="md:hidden">Menu</span>
-            <span className="hidden md:inline mono">K</span>
+            <span className="mono hidden md:inline">K</span>
           </button>
         </nav>
       </header>

@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const buttonStyles = cva(
   [
     "inline-flex items-center justify-center gap-2 whitespace-nowrap",
-    "rounded-inline font-medium select-none",
+    "select-none rounded-inline font-medium",
     "transition-[background-color,border-color,color,box-shadow,transform]",
     "duration-ui ease-standard",
     "active:scale-[0.985] active:duration-press",
@@ -19,11 +19,10 @@ const buttonStyles = cva(
     variants: {
       variant: {
         primary:
-          "bg-accent text-base-deep border border-accent hover:bg-[#ffc274] hover:shadow-lift",
+          "border border-accent bg-accent text-base-deep hover:bg-[#ffc274] hover:shadow-lift",
         secondary:
           "border border-line bg-surface text-ink hover:border-line-strong hover:bg-surface-raised",
-        ghost:
-          "border border-transparent text-muted hover:text-ink hover:border-line",
+        ghost: "border border-transparent text-muted hover:border-line hover:text-ink",
       },
       size: {
         sm: "h-9 px-3 text-xs",
@@ -42,7 +41,9 @@ export function Button({
   size,
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonVariants) {
-  return <button className={cn(buttonStyles({ variant, size }), className)} {...props} />;
+  return (
+    <button className={cn(buttonStyles({ variant, size }), className)} {...props} />
+  );
 }
 
 export function LinkButton({

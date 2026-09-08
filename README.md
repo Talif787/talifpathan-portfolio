@@ -5,14 +5,14 @@ default, a small motion system, and a content layer that is separate from the UI
 
 ## Stack
 
-| Concern    | Choice                                            |
-| ---------- | ------------------------------------------------- |
-| Framework  | Next.js 14, App Router                            |
-| Language   | TypeScript, strict                                |
-| Styling    | Tailwind CSS 3.4 over CSS custom-property tokens  |
-| Motion     | CSS first, Motion (`motion/react`) where needed   |
-| Icons      | lucide-react                                      |
-| Deployment | Vercel                                            |
+| Concern    | Choice                                           |
+| ---------- | ------------------------------------------------ |
+| Framework  | Next.js 14, App Router                           |
+| Language   | TypeScript, strict                               |
+| Styling    | Tailwind CSS 3.4 over CSS custom-property tokens |
+| Motion     | CSS first, Motion (`motion/react`) where needed  |
+| Icons      | lucide-react                                     |
+| Deployment | Vercel                                           |
 
 ## Run it
 
@@ -34,7 +34,9 @@ components/
   primitives/ Container, Section, Button, Chip, StatusDot
   motion/     Reveal, Disclosure, ArchitectureFlow, ScrollProgress
   nav/        SiteHeader, CommandMenu, SiteFooter
-  sections/   Hero, Projects, Experience, Skills, About, Testimonials, Contact
+  sections/   Hero, Projects, Experience, Skills, Education, About, Contact
+              plus two nested subsections: Recognition (inside Education)
+              and References (inside About)
 lib/          cn() helper and the motion system
 ```
 
@@ -42,7 +44,8 @@ lib/          cn() helper and the motion system
 
 Every section reads from `content/`. Nothing in `components/` contains copy.
 
-- `content/profile.ts` — name, positioning, location, status, emails, socials.
+- `content/profile.ts` — name, positioning, summary, location, status, what
+  you are looking for, emails, socials, headline metrics.
   Set `resumeUrl` to a file in `/public` and the resume CTA appears in the hero,
   the contact block and the command menu. It stays hidden while the value is null.
 - `content/projects.ts` — each project carries its own architecture nodes. The
@@ -50,7 +53,22 @@ Every section reads from `content/`. Nothing in `components/` contains copy.
   project actually has.
 - `content/experience.ts` — add `period: "Mon YYYY - Mon YYYY"` to any entry and
   the timeline column renders it. Omitted entries fall back to the organisation.
+- `content/education.ts` — degrees and coursework. Grades come from the
+  transcript. Omit `grade` on a course and it renders as in progress.
+- `content/credentials.ts` — certifications, awards, publications. Set
+  `primary: false` on a certification to move it behind the disclosure.
+- `content/experience.ts` — roles nest under an organisation, and contributions
+  are grouped by theme so a long tenure stays scannable.
 - `content/skills.ts`, `content/testimonials.ts`, `content/navigation.ts`.
+
+`navItems` drives the header row and has one entry per top-level section, which
+is what keeps the active indicator honest: there is no unlisted top-level
+section for it to land on. `secondaryNavItems` deep-links to the two nested
+subsections (`#recognition`, `#references`) from the footer and command menu.
+
+If you add a section, add a nav item for it, or nest it inside an existing one.
+A top-level section with no nav link will make the indicator appear stuck on the
+preceding item.
 
 Adding a nav item requires a matching section `id`; `SiteHeader` observes those
 ids to drive the active indicator, and `CommandMenu` builds its Navigate group

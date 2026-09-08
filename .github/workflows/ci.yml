@@ -17,5 +17,7 @@ jobs:
       - run: npm ci
       - run: npm run format:check
       - run: npm run lint
-      - run: npm run typecheck
+      # build before typecheck: tsc --noEmit needs next-env.d.ts, which only a
+      # build generates, so typecheck first fails on a fresh checkout
       - run: npm run build
+      - run: npm run typecheck

@@ -1,22 +1,30 @@
-import type { Award, Credential, Education, Profile } from "./types";
+import type { Profile } from "./types";
 
 export const profile: Profile = {
   name: "Talif Pathan",
+  fullName: "Talif Andalib Pathan",
   initials: "TP",
-  role: "Full-stack software engineer",
+  role: "Software engineer",
   positioning:
-    "I build real-time and cloud systems: the message paths, sync layers and AWS pipelines that have to keep working while people are using them.",
-  summary:
-    "Nearly four years of production engineering at Capgemini, progressing from Software Engineer to Associate Consultant, now finishing an MS in Computer Science at Northeastern. My work sits where the frontend meets the backend it depends on: websocket transports, collaborative document state, AWS ingestion and update pipelines.",
-  // VERIFY: derived from the Northeastern affiliation. Change if you list a different base.
+    "I build systems where the hard part is what happens between machines: consensus that holds when a node dies, storage engines that survive a crash mid-write, and event pipelines that deliver exactly once on top of at-least-once.",
+  summary: [
+    "I started at Capgemini as a backend engineer and stayed three years and nine months, most of it on Trusted Vehicle, an automotive platform built with Amazon. The work ran the full stack: React analytics dashboards shown at AWS Auto Accelerate 2022 in Boston, Python services on Lambda, a WebSocket layer with ActiveMQ and RabbitMQ that had to guarantee delivery and ordering through frontend failures, and IoT pipelines ingesting CAN bus telemetry every two seconds.",
+    "In my last year there I led the Generative AI for Software Engineering initiative on Amazon Bedrock, built a retrieval-augmented documentation assistant with LangChain, and set up a RAGAS evaluation workflow so answer quality could be measured rather than guessed at.",
+    "I am now finishing an MS in Computer Science at Northeastern, where distributed systems became the thing I care most about. I also teach: three teaching assistantships across relational and NoSQL database courses, supporting several hundred students.",
+  ],
   location: "Boston, MA",
-  // VERIFY: replaces the stale "seeking Spring/Summer 2026 co-op" line in the old README.
-  status: "Graduating December 2026",
+  // CONFLICT: resumes say "Expected Graduation: May 2027"; LinkedIn headline and
+  // summary both say December 2026. LinkedIn is more recent and self-authored.
+  status: "MS Computer Science, Northeastern, graduating December 2026",
+  // CONFLICT: LinkedIn headline says "Open to 2027 New Grad Roles" while the
+  // summary says graduating December 2026. Phrased here without a year.
+  seeking: "Open to software engineer, SDE, full-stack, backend and frontend roles",
   emails: {
     personal: "talifpathan13@gmail.com",
     academic: "pathan.t@northeastern.edu",
   },
-  // No resume file exists in /public yet. Drop one in and set this path; the CTA appears automatically.
+  // Phone number deliberately omitted: a public page is scraped constantly.
+  // It belongs on the resume PDF, which people request rather than crawl.
   resumeUrl: null,
   socials: [
     {
@@ -39,32 +47,16 @@ export const profile: Profile = {
     },
   ],
   focusAreas: [
-    "Real-time collaboration",
     "Distributed systems",
+    "Real-time and event-driven backends",
     "AWS cloud engineering",
+    "Applied LLM and RAG systems",
+  ],
+  spokenLanguages: ["English", "Hindi"],
+  headlineMetrics: [
+    { value: "3y 9m", label: "Engineering at Capgemini" },
+    { value: "14", label: "Projects with public source" },
+    { value: "1,000+", label: "IoT devices in production pipelines" },
+    { value: "2", label: "Published papers" },
   ],
 };
-
-export const education: Education = {
-  institution: "Northeastern University",
-  credential: "MS, Computer Science",
-  detail: "GPA 3.889",
-};
-
-export const credentials: Credential[] = [
-  {
-    name: "AWS Certified Solutions Architect, Associate",
-    issuer: "Amazon Web Services",
-    period: "2023 to 2026",
-  },
-  {
-    name: "AWS Certified Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    period: "2022 to 2026",
-  },
-];
-
-export const awards: Award[] = [
-  { name: "XTRAMILE Award", issuer: "Capgemini", year: "2023" },
-  { name: "The SUPER TEAM Award", issuer: "Capgemini", year: "2023" },
-];

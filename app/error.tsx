@@ -12,14 +12,14 @@ export default function Error({
 }) {
   return (
     <Container className="flex min-h-[70vh] flex-col justify-center py-section">
-      <p className="text-2xs mono text-error">Error</p>
+      <p className="mono text-2xs text-error">Error</p>
       <h1 className="mt-m text-3xl">This section failed to render</h1>
-      <p className="mt-m measure text-lg text-muted">
-        Reloading usually clears it. If it keeps happening, email me and include
-        what you were looking at.
+      <p className="measure mt-m text-lg text-muted">
+        Reloading usually clears it. If it keeps happening, email me and include what
+        you were looking at.
       </p>
       {error.digest ? (
-        <p className="mt-s text-2xs mono text-faint">Reference {error.digest}</p>
+        <p className="mono mt-s text-2xs text-faint">Reference {error.digest}</p>
       ) : null}
       <div className="mt-xl">
         <Button type="button" variant="primary" onClick={reset} className="w-fit">

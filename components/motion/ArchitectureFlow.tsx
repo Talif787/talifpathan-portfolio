@@ -25,7 +25,7 @@ export function ArchitectureFlow({
 
   return (
     <figure className={cn("flow", className)}>
-      <figcaption className="mb-s text-2xs mono text-faint">{caption}</figcaption>
+      <figcaption className="mono mb-s text-2xs text-faint">{caption}</figcaption>
       <div className="flow-track" role="img" aria-label={`${caption}: ${path}`}>
         {nodes.map((node, index) => (
           <div key={node.id} className="contents">
