@@ -53,6 +53,12 @@ Every section reads from `content/`. Nothing in `components/` contains copy.
   project actually has.
 - `content/experience.ts` — add `period: "Mon YYYY - Mon YYYY"` to any entry and
   the timeline column renders it. Omitted entries fall back to the organisation.
+- `content/profile.ts` also carries `portrait`. Set it to a real photograph in
+  `/public` with its true pixel dimensions and the About section renders it;
+  leave it `null` and nothing renders. It is the only raster image on the site.
+  Use an actual photograph: generated portraits carry signed Content Credentials
+  that anyone can read, and a fabricated face devalues every verified claim
+  around it.
 - `content/education.ts` — degrees and coursework. Grades come from the
   transcript. Omit `grade` on a course and it renders as in progress.
 - `content/credentials.ts` — certifications, awards, publications. Set

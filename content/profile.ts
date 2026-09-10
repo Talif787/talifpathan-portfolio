@@ -26,6 +26,15 @@ export const profile: Profile = {
   // Phone number deliberately omitted: a public page is scraped constantly.
   // It belongs on the resume PDF, which people request rather than crawl.
   resumeUrl: null,
+  // Drop a real photograph in /public and fill this in. Give the real pixel
+  // dimensions: next/image uses them to reserve space and avoid layout shift.
+  //   portrait: {
+  //     src: "/talif-pathan.jpg",
+  //     alt: "Talif Pathan",
+  //     width: 1200,
+  //     height: 1500,
+  //   },
+  portrait: null,
   socials: [
     {
       label: "GitHub",

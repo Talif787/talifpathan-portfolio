@@ -2,6 +2,7 @@ import { profile } from "@/content";
 import { Section } from "@/components/primitives/Section";
 import { StatusDot } from "@/components/primitives/StatusDot";
 import { ReferencesBlock } from "./Testimonials";
+import { Portrait } from "./Portrait";
 
 /**
  * The side panel is a definition list, not a stack of headings. These are
@@ -28,22 +29,26 @@ export function About() {
             ))}
           </div>
 
-          <dl className="flex flex-col gap-l">
-            <div>
-              <dt className="text-xs text-faint">Looking for</dt>
-              <dd className="mt-2xs text-base text-ink">{profile.seeking}</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-faint">Based in</dt>
-              <dd className="mt-2xs text-base text-ink">{profile.location}</dd>
-            </div>
-            <div>
-              <dt className="text-xs text-faint">Languages</dt>
-              <dd className="mt-2xs text-base text-ink">
-                {profile.spokenLanguages.join(", ")}
-              </dd>
-            </div>
-          </dl>
+          <div className="flex flex-col gap-l">
+            <Portrait />
+
+            <dl className="flex flex-col gap-l">
+              <div>
+                <dt className="text-xs text-faint">Looking for</dt>
+                <dd className="mt-2xs text-base text-ink">{profile.seeking}</dd>
+              </div>
+              <div>
+                <dt className="text-xs text-faint">Based in</dt>
+                <dd className="mt-2xs text-base text-ink">{profile.location}</dd>
+              </div>
+              <div>
+                <dt className="text-xs text-faint">Languages</dt>
+                <dd className="mt-2xs text-base text-ink">
+                  {profile.spokenLanguages.join(", ")}
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
 
         <ReferencesBlock />

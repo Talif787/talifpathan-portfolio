@@ -43,6 +43,15 @@ export type Profile = {
   emails: { personal: string; academic: string };
   /** Null until a resume file exists in /public. The CTA hides itself when null. */
   resumeUrl: string | null;
+  /**
+   * Null until a real photograph exists in /public. The About section renders
+   * nothing when null, so there is no gap and no broken image.
+   *
+   * Must be an actual photograph. A generated portrait undermines every
+   * verified claim on the rest of the page, and Content Credentials make it
+   * checkable by anyone who drops the file on verify.contentauthenticity.org.
+   */
+  portrait: { src: string; alt: string; width: number; height: number } | null;
   socials: SocialLink[];
   focusAreas: string[];
   spokenLanguages: string[];
