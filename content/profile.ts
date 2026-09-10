@@ -28,13 +28,13 @@ export const profile: Profile = {
   resumeUrl: null,
   // Drop a real photograph in /public and fill this in. Give the real pixel
   // dimensions: next/image uses them to reserve space and avoid layout shift.
-  //   portrait: {
-  //     src: "/talif-pathan.jpg",
-  //     alt: "Talif Pathan",
-  //     width: 1200,
-  //     height: 1500,
-  //   },
-  portrait: null,
+  portrait: {
+    src: "/talif-pathan.png",
+    alt: "Talif Pathan",
+    width: 1200,
+    height: 1500,
+  },
+  // portrait: null,
   socials: [
     {
       label: "GitHub",
