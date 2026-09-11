@@ -55,7 +55,7 @@ export function CopyEmail({ email }: { email: string }) {
         {label}
       </Button>
       {state === "error" ? (
-        <p className="text-2xs mono text-faint">
+        <p className="mono text-2xs text-faint">
           <span className="select-all">{email}</span>
         </p>
       ) : null}

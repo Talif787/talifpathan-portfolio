@@ -1,7 +1,9 @@
 export * from "./types";
-export { profile, education, credentials, awards } from "./profile";
-export { navItems } from "./navigation";
+export { profile } from "./profile";
+export { degrees } from "./education";
+export { certifications, awards, publications } from "./credentials";
+export { navItems, secondaryNavItems } from "./navigation";
 export { projects } from "./projects";
-export { experience } from "./experience";
+export { organisations } from "./experience";
 export { skillGroups } from "./skills";
 export { testimonials } from "./testimonials";

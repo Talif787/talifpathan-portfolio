@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "github": {
+    "silent": false,
+    "autoJobCancelation": true
+  },
+  "cleanUrls": true,
+  "trailingSlash": false
+}

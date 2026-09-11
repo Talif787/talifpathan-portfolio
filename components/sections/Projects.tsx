@@ -1,20 +1,22 @@
 import { projects } from "@/content";
 import { Section } from "@/components/primitives/Section";
-import { ProjectRow } from "./ProjectRow";
+import { ProjectList } from "./ProjectList";
 
 export function Projects() {
   return (
     <Section
       id="projects"
       label="Projects"
-      title="Systems where the hard part is keeping clients in agreement"
-      intro="Both of these are real-time products. The interesting engineering is not the interface, it is what happens between a keystroke and everyone else seeing it."
+      title="Fourteen systems, every one with public source"
+      intro="Consensus written from scratch, a storage engine built from first principles, control planes, event-driven platforms and real-time products. Filter by area, or open any project for the engineering detail."
+      aside={
+        <p className="mono text-2xs text-faint">
+          {projects.length} projects, {projects.filter((p) => p.links.demo).length} with
+          live deployments
+        </p>
+      }
     >
-      <div className="flex flex-col">
-        {projects.map((project) => (
-          <ProjectRow key={project.slug} project={project} />
-        ))}
-      </div>
+      <ProjectList />
     </Section>
   );
 }
