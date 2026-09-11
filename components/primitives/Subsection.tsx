@@ -40,7 +40,7 @@ export function Subsection({
       <h3 id={headingId} className="text-xl">
         {title}
       </h3>
-      {intro ? <p className="measure mt-s text-base text-muted">{intro}</p> : null}
+      {intro ? <p className="mt-s measure text-base text-muted">{intro}</p> : null}
       <div className="mt-l">{children}</div>
     </section>
   );

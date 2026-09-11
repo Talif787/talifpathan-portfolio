@@ -13,18 +13,10 @@ export const certifications: Certification[] = [
     period: "2022 to 2026",
     primary: true,
   },
-  {
-    name: "Terraform for the Absolute Beginners with Labs",
-    issuer: "Course certificate",
-    primary: false,
-  },
+  { name: "Terraform for the Absolute Beginners with Labs", issuer: "Course certificate", primary: false },
   { name: "The Blockchain System", issuer: "Course certificate", primary: false },
   { name: "Python (Basic)", issuer: "Course certificate", primary: false },
-  {
-    name: "Interactivity with JavaScript",
-    issuer: "Course certificate",
-    primary: false,
-  },
+  { name: "Interactivity with JavaScript", issuer: "Course certificate", primary: false },
   { name: "Introduction to CSS3", issuer: "Course certificate", primary: false },
 ];
 

@@ -5,19 +5,47 @@ on:
     branches: [main]
   pull_request:
 
+# A superseded run has nothing useful left to say. Cancel it.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   verify:
+    name: Verify
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
+
       - run: npm ci
-      - run: npm run format:check
-      - run: npm run lint
-      # build before typecheck: tsc --noEmit needs next-env.d.ts, which only a
-      # build generates, so typecheck first fails on a fresh checkout
-      - run: npm run build
-      - run: npm run typecheck
+
+      - name: Format
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      # Build before typecheck: tsc --noEmit needs next-env.d.ts, which only a
+      # build generates, so typecheck first fails on a fresh checkout.
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-build
+          path: .next
+          retention-days: 3

@@ -18,7 +18,8 @@ export const profile: Profile = {
   status: "MS Computer Science, Northeastern, graduating December 2026",
   // CONFLICT: LinkedIn headline says "Open to 2027 New Grad Roles" while the
   // summary says graduating December 2026. Phrased here without a year.
-  seeking: "Open to software engineer, SDE, full-stack, backend and frontend roles",
+  seeking:
+    "Open to software engineer, SDE, full-stack, backend and frontend roles",
   emails: {
     personal: "talifpathan13@gmail.com",
     academic: "pathan.t@northeastern.edu",
@@ -28,13 +29,13 @@ export const profile: Profile = {
   resumeUrl: null,
   // Drop a real photograph in /public and fill this in. Give the real pixel
   // dimensions: next/image uses them to reserve space and avoid layout shift.
-  portrait: {
-    src: "/talif-pathan.png",
-    alt: "Talif Pathan",
-    width: 1200,
-    height: 1500,
-  },
-  // portrait: null,
+  //   portrait: {
+  //     src: "/talif-pathan.jpg",
+  //     alt: "Talif Pathan",
+  //     width: 1200,
+  //     height: 1500,
+  //   },
+  portrait: null,
   socials: [
     {
       label: "GitHub",

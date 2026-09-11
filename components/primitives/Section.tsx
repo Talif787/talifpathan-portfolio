@@ -10,8 +10,6 @@ type SectionProps = {
   intro?: string;
   /** Content rendered under the rail label, above the title. */
   aside?: React.ReactNode;
-  /** Skip content-visibility for above-the-fold sections. */
-  eager?: boolean;
   className?: string;
   children: React.ReactNode;
 };
@@ -27,7 +25,6 @@ export function Section({
   title,
   intro,
   aside,
-  eager = false,
   className,
   children,
 }: SectionProps) {
@@ -37,7 +34,7 @@ export function Section({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={cn("py-section", !eager && "section-defer", className)}
+      className={cn("py-section", className)}
     >
       <Container>
         <Reveal>
@@ -47,11 +44,11 @@ export function Section({
               {aside}
             </div>
             <div>
-              <h2 id={headingId} className="measure-tight text-3xl">
+              <h2 id={headingId} className="text-3xl measure-tight">
                 {title}
               </h2>
               {intro ? (
-                <p className="measure mt-l text-lg text-muted">{intro}</p>
+                <p className="mt-l measure text-muted text-lg">{intro}</p>
               ) : null}
             </div>
           </div>

@@ -11,7 +11,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "verify": "npm run format:check && npm run lint && npm run build && npm run typecheck",
-    "links": "bash scripts/check-links.sh"
+    "links": "bash scripts/check-links.sh",
+    "smoke": "bash scripts/smoke.sh"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.0",

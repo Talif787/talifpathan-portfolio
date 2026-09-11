@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/nav/SiteHeader";
 import { SiteFooter } from "@/components/nav/SiteFooter";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { ScrollToTop } from "@/components/motion/ScrollToTop";
+import { ScrollManager } from "@/components/nav/ScrollManager";
 
 /**
  * Space Grotesk carries the page: geometric enough to read as engineered,
@@ -104,6 +105,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable}`}>
       <body className="font-sans antialiased">
+        <ScrollManager />
         <ScrollProgress />
         <SiteHeader />
         <div id="scroll-sentinel" aria-hidden className="absolute top-0 h-px w-px" />

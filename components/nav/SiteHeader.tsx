@@ -52,9 +52,9 @@ export function SiteHeader() {
    *     reach them, so it never reported as intersecting at all.
    *
    * Reading `getBoundingClientRect` for the handful of nav sections once per
-   * animation frame is both cheaper to reason about and immune to the
-   * `content-visibility: auto` reflows that happen as sections below the fold
-   * render for the first time and grow past their intrinsic-size placeholder.
+   * animation frame is both cheaper to reason about and immune to layout
+   * shifting underneath it, because it measures live geometry every frame
+   * rather than trusting a cached threshold crossing.
    */
   useEffect(() => {
     const sections = navItems
@@ -130,7 +130,7 @@ export function SiteHeader() {
         >
           <a
             href="#top"
-            className="mono rounded-inline text-xs tracking-tight text-ink"
+            className="rounded-inline text-xs mono tracking-tight text-ink"
           >
             {profile.name}
           </a>
@@ -179,7 +179,7 @@ export function SiteHeader() {
           >
             <Command aria-hidden className="size-3.5" />
             <span className="md:hidden">Menu</span>
-            <span className="mono hidden md:inline">K</span>
+            <span className="hidden md:inline mono">K</span>
           </button>
         </nav>
       </header>

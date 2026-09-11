@@ -49,8 +49,7 @@ export const organisations: Organisation[] = [
       },
       {
         id: "ta-ds4300",
-        title:
-          "Undergraduate Teaching Assistant, DS 4300 Large-Scale Information Storage and Retrieval",
+        title: "Undergraduate Teaching Assistant, DS 4300 Large-Scale Information Storage and Retrieval",
         period: "Jan 2026 to Jun 2026",
         term: "Spring and Summer A 2026",
         location: "Boston, MA",

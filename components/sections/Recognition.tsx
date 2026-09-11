@@ -28,7 +28,7 @@ export function RecognitionBlock() {
                 className="border-t border-line-faint pt-m first:border-t-0 first:pt-0"
               >
                 <p className="text-base text-ink">{item.name}</p>
-                <p className="mono mt-2xs text-2xs text-faint">
+                <p className="mt-2xs text-2xs mono text-faint">
                   {item.issuer}
                   {item.period ? `, ${item.period}` : ""}
                 </p>
@@ -62,7 +62,7 @@ export function RecognitionBlock() {
                 className="border-t border-line-faint pt-m first:border-t-0 first:pt-0"
               >
                 <p className="text-base text-ink">{item.name}</p>
-                <p className="mono mt-2xs text-2xs text-faint">
+                <p className="mt-2xs text-2xs mono text-faint">
                   {item.issuer}, {item.year}
                 </p>
               </li>
@@ -79,7 +79,7 @@ export function RecognitionBlock() {
                 className="border-t border-line-faint pt-m first:border-t-0 first:pt-0"
               >
                 <p className="text-base text-ink">{item.title}</p>
-                <p className="mono mt-2xs text-2xs text-faint">
+                <p className="mt-2xs text-2xs mono text-faint">
                   {item.venue}, {item.year}
                 </p>
                 {item.note ? (

@@ -19,10 +19,7 @@ export function Education() {
     >
       <div className="flex flex-col gap-2xl">
         {degrees.map((degree) => (
-          <section
-            key={degree.id}
-            aria-label={`${degree.credential}, ${degree.institution}`}
-          >
+          <section key={degree.id} aria-label={`${degree.credential}, ${degree.institution}`}>
             <header className="flex flex-col gap-2xs border-b border-line pb-m md:flex-row md:items-baseline md:justify-between">
               <div>
                 <h3 className="text-xl">
@@ -34,8 +31,8 @@ export function Education() {
                 </p>
               </div>
               <div className="shrink-0 md:text-end">
-                <p className="mono text-2xs text-faint">{degree.period}</p>
-                <p className="mono mt-2xs text-2xs text-faint">{degree.location}</p>
+                <p className="text-2xs mono text-faint">{degree.period}</p>
+                <p className="mt-2xs text-2xs mono text-faint">{degree.location}</p>
               </div>
             </header>
 
@@ -47,7 +44,7 @@ export function Education() {
             ) : null}
 
             {degree.highlights?.length ? (
-              <ul className="measure mt-m space-y-s">
+              <ul className="mt-m measure space-y-s">
                 {degree.highlights.map((item) => (
                   <li
                     key={item}
@@ -85,9 +82,7 @@ export function Education() {
                         <td className="course-code">{course.code}</td>
                         <td className="course-title">{course.title}</td>
                         <td className="course-term">{course.term}</td>
-                        <td className="course-grade">
-                          {course.grade ?? "in progress"}
-                        </td>
+                        <td className="course-grade">{course.grade ?? "in progress"}</td>
                       </tr>
                     ))}
                   </tbody>

@@ -42,7 +42,7 @@ export function ReferencesBlock() {
                 />
               </a>
               <p className="mt-2xs text-xs text-faint">{testimonial.title}</p>
-              <p className="mono mt-2xs text-2xs text-faint">
+              <p className="mt-2xs text-2xs mono text-faint">
                 {testimonial.relationship}
               </p>
             </figcaption>

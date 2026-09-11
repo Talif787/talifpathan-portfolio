@@ -6,6 +6,7 @@ import { ArrowUpRight, Check, Copy, CornerDownLeft, Search } from "lucide-react"
 import { dialogVariants, overlayVariants } from "@/lib/motion";
 import { navItems, profile, secondaryNavItems } from "@/content";
 import { cn } from "@/lib/utils";
+import { scrollToSection } from "@/lib/scroll";
 
 type Command = {
   id: string;
@@ -55,12 +56,12 @@ export function CommandMenu({
   }, []);
 
   const commands = useMemo<Command[]>(() => {
+    // Same self-correcting scroll the header and footer links use, so the
+    // palette cannot drift out of sync with them.
     const goTo = (hash: string) => () => {
       close();
-      document
-        .querySelector(hash)
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.replaceState(null, "", hash);
+      scrollToSection(hash.slice(1));
+      window.history.pushState(null, "", hash);
     };
 
     const list: Command[] = [...navItems, ...secondaryNavItems].map((item) => ({
@@ -257,7 +258,7 @@ export function CommandMenu({
                   return (
                     <li key={command.id}>
                       {showGroup ? (
-                        <p className="mono px-m pb-1 pt-m text-2xs text-faint">
+                        <p className="px-m pb-1 pt-m text-2xs mono text-faint">
                           {command.group}
                         </p>
                       ) : null}
@@ -279,7 +280,7 @@ export function CommandMenu({
                           {isCopied ? "Copied to clipboard" : command.label}
                         </span>
                         {command.hint ? (
-                          <span className="mono hidden text-2xs text-faint sm:inline">
+                          <span className="hidden text-2xs mono text-faint sm:inline">
                             {command.hint}
                           </span>
                         ) : null}

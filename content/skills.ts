@@ -12,17 +12,7 @@ export const skillGroups: SkillGroup[] = [
   {
     name: "Languages",
     description: "What I write",
-    items: [
-      "Go",
-      "TypeScript",
-      "Python",
-      "Java",
-      "C++17",
-      "JavaScript",
-      "C",
-      "SQL",
-      "R",
-    ],
+    items: ["Go", "TypeScript", "Python", "Java", "C++17", "JavaScript", "C", "SQL", "R"],
   },
   {
     name: "Backend and services",

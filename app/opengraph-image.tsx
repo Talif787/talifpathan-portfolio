@@ -21,58 +21,56 @@ const handles = profile.socials
 
 export default function OpengraphImage() {
   return new ImageResponse(
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        padding: 80,
-        backgroundColor: "#0c141f",
-        backgroundImage:
-          "radial-gradient(circle at 85% 0%, rgba(242,178,92,0.18), rgba(242,178,92,0) 55%)",
-        color: "#e6ecf5",
-        fontFamily: "sans-serif",
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div style={{ width: 28, height: 2, backgroundColor: "#f2b25c" }} />
-        <div
-          style={{ display: "flex", marginLeft: 16, fontSize: 24, color: "#8c9cb3" }}
-        >
-          {profile.location}
-        </div>
-      </div>
-
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div
-          style={{ display: "flex", fontSize: 92, letterSpacing: -3, lineHeight: 1 }}
-        >
-          {profile.name}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            fontSize: 32,
-            color: "#8c9cb3",
-            marginTop: 24,
-            maxWidth: 940,
-            lineHeight: 1.35,
-          }}
-        >
-          {headline}
-        </div>
-      </div>
-
-      <div style={{ display: "flex", fontSize: 24, color: "#5d6b80" }}>
-        {handles.map((handle) => (
-          <div key={handle} style={{ display: "flex", marginRight: 40 }}>
-            {handle}
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: 80,
+          backgroundColor: "#0c141f",
+          backgroundImage:
+            "radial-gradient(circle at 85% 0%, rgba(242,178,92,0.18), rgba(242,178,92,0) 55%)",
+          color: "#e6ecf5",
+          fontFamily: "sans-serif",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ width: 28, height: 2, backgroundColor: "#f2b25c" }} />
+          <div style={{ display: "flex", marginLeft: 16, fontSize: 24, color: "#8c9cb3" }}>
+            {profile.location}
           </div>
-        ))}
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", fontSize: 92, letterSpacing: -3, lineHeight: 1 }}>
+            {profile.name}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 32,
+              color: "#8c9cb3",
+              marginTop: 24,
+              maxWidth: 940,
+              lineHeight: 1.35,
+            }}
+          >
+            {headline}
+          </div>
+        </div>
+
+        <div style={{ display: "flex", fontSize: 24, color: "#5d6b80" }}>
+          {handles.map((handle) => (
+            <div key={handle} style={{ display: "flex", marginRight: 40 }}>
+              {handle}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>,
+    ),
     size,
   );
 }
