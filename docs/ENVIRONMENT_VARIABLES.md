@@ -16,8 +16,8 @@ app/sitemap.ts:3    NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
 
 ## PUBLIC / CLIENT-SAFE
 
-| Name | Required | Purpose |
-|---|---|---|
+| Name                   | Required           | Purpose                                                                                                                                    |
+| ---------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `NEXT_PUBLIC_SITE_URL` | No, has a fallback | Absolute origin. Feeds `metadataBase`, the canonical link, Open Graph and Twitter tags, the JSON-LD `url`, `robots.txt` and `sitemap.xml`. |
 
 Inlined into the client bundle by design. Not a secret. Nothing is gained by
@@ -31,12 +31,12 @@ which is why `.env.local` protection is a hygiene measure rather than a control.
 
 ## Values per environment
 
-| Environment | Value | Set where |
-|---|---|---|
-| Local | `http://localhost:8080` | `.env.local`, gitignored |
-| Preview | leave unset | Vercel injects `VERCEL_URL`; the fallback is harmless on a throwaway URL |
-| Production | `https://talifpathan.vercel.app` | Vercel project settings, Production scope |
-| CI | `https://talifpathan.vercel.app` | GitHub repository **variable** (not a secret) |
+| Environment | Value                            | Set where                                                                |
+| ----------- | -------------------------------- | ------------------------------------------------------------------------ |
+| Local       | `http://localhost:8080`          | `.env.local`, gitignored                                                 |
+| Preview     | leave unset                      | Vercel injects `VERCEL_URL`; the fallback is harmless on a throwaway URL |
+| Production  | `https://talifpathan.vercel.app` | Vercel project settings, Production scope                                |
+| CI          | `https://talifpathan.vercel.app` | GitHub repository **variable** (not a secret)                            |
 
 ```bash
 # local

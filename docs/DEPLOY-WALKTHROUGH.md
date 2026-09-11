@@ -43,23 +43,23 @@ gh repo list --limit 100 | grep -i portfolio
 
 ### Every value, in one table
 
-| Field | Exact value | Where it goes |
-|---|---|---|
-| Vercel project name | `talifpathan` | Vercel, project creation |
-| Framework preset | `Next.js` | Vercel, project settings |
-| Root directory | `./` | Vercel, project settings |
-| Build command | `npm run build` | Vercel, project settings |
-| Install command | `npm ci` | Vercel, project settings |
-| Output directory | leave default | Vercel, project settings |
-| Node.js version | `22.x` | Vercel, project settings |
-| Function region | `iad1` (Washington DC) | `vercel.json`, already set |
-| Production branch | `main` | Vercel, Git settings |
-| Env var name | `NEXT_PUBLIC_SITE_URL` | Vercel + GitHub |
-| Env var value | `https://talifpathan.vercel.app` | Vercel Production, GitHub variable |
-| Vercel environments | `production`, `preview`, `development` | Vercel env scopes |
-| GitHub repo visibility | `public` | required for free CodeQL and unlimited Actions |
-| GitHub variable | `NEXT_PUBLIC_SITE_URL` | repository **variable**, not a secret |
-| GitHub secrets | **none** | nothing to add |
+| Field                  | Exact value                            | Where it goes                                  |
+| ---------------------- | -------------------------------------- | ---------------------------------------------- |
+| Vercel project name    | `talifpathan`                          | Vercel, project creation                       |
+| Framework preset       | `Next.js`                              | Vercel, project settings                       |
+| Root directory         | `./`                                   | Vercel, project settings                       |
+| Build command          | `npm run build`                        | Vercel, project settings                       |
+| Install command        | `npm ci`                               | Vercel, project settings                       |
+| Output directory       | leave default                          | Vercel, project settings                       |
+| Node.js version        | `22.x`                                 | Vercel, project settings                       |
+| Function region        | `iad1` (Washington DC)                 | `vercel.json`, already set                     |
+| Production branch      | `main`                                 | Vercel, Git settings                           |
+| Env var name           | `NEXT_PUBLIC_SITE_URL`                 | Vercel + GitHub                                |
+| Env var value          | `https://talifpathan.vercel.app`       | Vercel Production, GitHub variable             |
+| Vercel environments    | `production`, `preview`, `development` | Vercel env scopes                              |
+| GitHub repo visibility | `public`                               | required for free CodeQL and unlimited Actions |
+| GitHub variable        | `NEXT_PUBLIC_SITE_URL`                 | repository **variable**, not a secret          |
+| GitHub secrets         | **none**                               | nothing to add                                 |
 
 **On the region.** `iad1` is set in `vercel.json` and is currently inert: this
 project has zero serverless functions, so nothing executes in a region. Static
@@ -217,16 +217,16 @@ you rebuild.
 
 The CLI cannot set these. Vercel dashboard, Project `talifpathan`, Settings:
 
-| Setting | Section | Exact value |
-|---|---|---|
-| Framework Preset | General | `Next.js` |
-| Root Directory | General | `./` |
-| Build Command | General | `npm run build` |
-| Install Command | General | `npm ci` |
-| Output Directory | General | leave default (override off) |
-| Node.js Version | General | `22.x` |
-| Production Branch | Git | `main` |
-| Deployment Protection | Deployment Protection | **Disabled** for production |
+| Setting               | Section               | Exact value                  |
+| --------------------- | --------------------- | ---------------------------- |
+| Framework Preset      | General               | `Next.js`                    |
+| Root Directory        | General               | `./`                         |
+| Build Command         | General               | `npm run build`              |
+| Install Command       | General               | `npm ci`                     |
+| Output Directory      | General               | leave default (override off) |
+| Node.js Version       | General               | `22.x`                       |
+| Production Branch     | Git                   | `main`                       |
+| Deployment Protection | Deployment Protection | **Disabled** for production  |
 
 **Install Command matters.** Vercel defaults to `npm install`, which can resolve
 differently from your lockfile. `npm ci` makes the production build byte-for-byte
@@ -328,16 +328,16 @@ rehearsed one.
 
 ## Step 10. Post-deployment checks
 
-| When | Check | Command |
-|---|---|---|
-| T+0 | Smoke passes | `npm run smoke "$PROD_URL"` |
-| T+0 | Lighthouse budgets green | `gh run list --workflow=deploy-verify.yml --limit 1` |
-| T+15m | Real phone on cellular | open `$PROD_URL` |
-| T+30m | First synthetic run passed | `gh run list --workflow=synthetic.yml --limit 1` |
-| T+1h | No build or runtime errors | Vercel dashboard, Logs |
-| T+2h | OG card renders when shared | paste `$PROD_URL` into LinkedIn or Slack |
-| T+24h | No incident issues | `gh issue list --label incident` |
-| T+24h | Usage far below Hobby caps | Vercel dashboard, Usage |
+| When  | Check                       | Command                                              |
+| ----- | --------------------------- | ---------------------------------------------------- |
+| T+0   | Smoke passes                | `npm run smoke "$PROD_URL"`                          |
+| T+0   | Lighthouse budgets green    | `gh run list --workflow=deploy-verify.yml --limit 1` |
+| T+15m | Real phone on cellular      | open `$PROD_URL`                                     |
+| T+30m | First synthetic run passed  | `gh run list --workflow=synthetic.yml --limit 1`     |
+| T+1h  | No build or runtime errors  | Vercel dashboard, Logs                               |
+| T+2h  | OG card renders when shared | paste `$PROD_URL` into LinkedIn or Slack             |
+| T+24h | No incident issues          | `gh issue list --label incident`                     |
+| T+24h | Usage far below Hobby caps  | Vercel dashboard, Usage                              |
 
 ### One-command re-verification
 
@@ -371,14 +371,14 @@ Instant, no rebuild. There are no database migrations to unwind.
 
 ## Troubleshooting
 
-| Symptom | Cause | Fix |
-|---|---|---|
+| Symptom                                               | Cause                                 | Fix                                                                      |
+| ----------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------ |
 | Production URL is `talif-pathan-portfolio.vercel.app` | `vercel link` used the directory name | Step 3, delete the wrong project and relink with `--project talifpathan` |
-| `robots.txt` says `localhost:3000` | Built without `NEXT_PUBLIC_SITE_URL` | `npx vercel@latest --prod --force` |
-| Branch protection rejects the contexts | Workflows have not run once | Push, `gh run watch`, then Step 2f |
-| Merges deadlock waiting on "Smoke test" | It was added as a required check | Remove it; it runs on `deployment_status`, not the PR head |
-| `synthetic.yml` 401s every 30 minutes | Deployment Protection is on | Step 5, disable it for production |
-| CodeQL does not run | Repository is private | Step 2a |
-| CI fails on `format:check` | Files not Prettier-formatted | `npm run format`, commit |
-| Build queued for minutes | Hobby allows one concurrent build | Wait, or push less often |
-| Project paused | A Hobby limit was exceeded | Wait for the 30-day reset; Hobby cannot be billed |
+| `robots.txt` says `localhost:3000`                    | Built without `NEXT_PUBLIC_SITE_URL`  | `npx vercel@latest --prod --force`                                       |
+| Branch protection rejects the contexts                | Workflows have not run once           | Push, `gh run watch`, then Step 2f                                       |
+| Merges deadlock waiting on "Smoke test"               | It was added as a required check      | Remove it; it runs on `deployment_status`, not the PR head               |
+| `synthetic.yml` 401s every 30 minutes                 | Deployment Protection is on           | Step 5, disable it for production                                        |
+| CodeQL does not run                                   | Repository is private                 | Step 2a                                                                  |
+| CI fails on `format:check`                            | Files not Prettier-formatted          | `npm run format`, commit                                                 |
+| Build queued for minutes                              | Hobby allows one concurrent build     | Wait, or push less often                                                 |
+| Project paused                                        | A Hobby limit was exceeded            | Wait for the 30-day reset; Hobby cannot be billed                        |

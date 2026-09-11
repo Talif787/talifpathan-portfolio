@@ -4,8 +4,7 @@ name: Verify deployment
 # Hooking that event verifies every deployment, preview and production alike,
 # without this repository holding a Vercel token. Fewer secrets, smaller blast
 # radius, and previews get the same gate production does.
-on:
-  deployment_status
+on: deployment_status
 
 concurrency:
   group: verify-${{ github.event.deployment_status.environment_url }}

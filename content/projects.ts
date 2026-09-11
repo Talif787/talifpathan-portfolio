@@ -17,7 +17,8 @@ export const projects: Project[] = [
   {
     slug: "helix",
     name: "Helix",
-    kicker: "Leaderless, tunably-consistent distributed key-value store with its own LSM engine",
+    kicker:
+      "Leaderless, tunably-consistent distributed key-value store with its own LSM engine",
     domain: "Distributed systems",
     featured: true,
     context: "Personal project",
@@ -71,7 +72,8 @@ export const projects: Project[] = [
   {
     slug: "distributed-backtesting-engine",
     name: "Distributed financial backtesting engine",
-    kicker: "Raft consensus written from scratch in C++17, with zero external dependencies",
+    kicker:
+      "Raft consensus written from scratch in C++17, with zero external dependencies",
     domain: "Distributed systems",
     featured: true,
     context: "CS 6650, Building Scalable Distributed Systems",
@@ -102,14 +104,36 @@ export const projects: Project[] = [
       { value: "3.98x", label: "speedup on four workers" },
       { value: "84%", label: "smaller payloads than JSON" },
     ],
-    stack: ["C++17", "Raft consensus", "TCP sockets", "POSIX threads", "CMake", "Linux cluster"],
+    stack: [
+      "C++17",
+      "Raft consensus",
+      "TCP sockets",
+      "POSIX threads",
+      "CMake",
+      "Linux cluster",
+    ],
     architecture: {
       caption: "Job path",
       nodes: [
         { id: "client", label: "Client", detail: "CSV jobs", kind: "client" },
-        { id: "wire", label: "Binary TCP", detail: "length-prefixed", kind: "transport" },
-        { id: "control", label: "Raft controller", detail: "3 nodes, 1 leader", kind: "app" },
-        { id: "workers", label: "Worker pool", detail: "least-loaded", kind: "compute" },
+        {
+          id: "wire",
+          label: "Binary TCP",
+          detail: "length-prefixed",
+          kind: "transport",
+        },
+        {
+          id: "control",
+          label: "Raft controller",
+          detail: "3 nodes, 1 leader",
+          kind: "app",
+        },
+        {
+          id: "workers",
+          label: "Worker pool",
+          detail: "least-loaded",
+          kind: "compute",
+        },
         { id: "ckpt", label: "Checkpoints", detail: "atomic writes", kind: "data" },
       ],
     },
@@ -120,7 +144,8 @@ export const projects: Project[] = [
   {
     slug: "payments-ledger",
     name: "Real-time payments ledger with fraud detection",
-    kicker: "Double-entry bookkeeping where the database itself refuses to let the books go unbalanced",
+    kicker:
+      "Double-entry bookkeeping where the database itself refuses to let the books go unbalanced",
     domain: "Distributed systems",
     featured: true,
     context: "Personal project",
@@ -162,8 +187,18 @@ export const projects: Project[] = [
       nodes: [
         { id: "req", label: "Request", detail: "idempotency key", kind: "client" },
         { id: "ledger", label: "Ledger", detail: "SERIALIZABLE", kind: "app" },
-        { id: "outbox", label: "Outbox to Kafka", detail: "exactly-once", kind: "transport" },
-        { id: "recon", label: "Reconciliation", detail: "3-way check", kind: "compute" },
+        {
+          id: "outbox",
+          label: "Outbox to Kafka",
+          detail: "exactly-once",
+          kind: "transport",
+        },
+        {
+          id: "recon",
+          label: "Reconciliation",
+          detail: "3-way check",
+          kind: "compute",
+        },
         { id: "books", label: "Books", detail: "balanced, audited", kind: "data" },
       ],
     },
@@ -175,7 +210,8 @@ export const projects: Project[] = [
   {
     slug: "event-driven-order-fulfillment",
     name: "Event-driven order fulfillment platform",
-    kicker: "Six microservices across two languages, coordinated by an orchestration saga",
+    kicker:
+      "Six microservices across two languages, coordinated by an orchestration saga",
     domain: "Distributed systems",
     featured: false,
     context: "Personal project",
@@ -214,10 +250,25 @@ export const projects: Project[] = [
     architecture: {
       caption: "Order lifecycle",
       nodes: [
-        { id: "order", label: "Order service", detail: "accepts, outboxes", kind: "app" },
+        {
+          id: "order",
+          label: "Order service",
+          detail: "accepts, outboxes",
+          kind: "app",
+        },
         { id: "kafka", label: "Kafka", detail: "4 topics", kind: "transport" },
-        { id: "saga", label: "Saga orchestrator", detail: "compensating", kind: "compute" },
-        { id: "svcs", label: "Inventory, payment, fulfillment", detail: "db per service", kind: "compute" },
+        {
+          id: "saga",
+          label: "Saga orchestrator",
+          detail: "compensating",
+          kind: "compute",
+        },
+        {
+          id: "svcs",
+          label: "Inventory, payment, fulfillment",
+          detail: "db per service",
+          kind: "compute",
+        },
         { id: "cqrs", label: "CQRS read models", detail: "projected", kind: "data" },
       ],
     },
@@ -283,7 +334,8 @@ export const projects: Project[] = [
   {
     slug: "prism",
     name: "Prism",
-    kicker: "Multi-tenant observability platform ingesting metrics, logs and traces over OTLP",
+    kicker:
+      "Multi-tenant observability platform ingesting metrics, logs and traces over OTLP",
     domain: "Platform engineering",
     featured: false,
     context: "Personal project",
@@ -333,7 +385,8 @@ export const projects: Project[] = [
   {
     slug: "flux",
     name: "Flux",
-    kicker: "Distributed GPU inference control plane with metering and per-tenant budgets",
+    kicker:
+      "Distributed GPU inference control plane with metering and per-tenant budgets",
     domain: "Platform engineering",
     featured: false,
     context: "Personal project",
@@ -373,7 +426,12 @@ export const projects: Project[] = [
       nodes: [
         { id: "client", label: "Client", detail: "API key", kind: "client" },
         { id: "cp", label: "Control plane", detail: "auth, budgets", kind: "app" },
-        { id: "route", label: "Gateway", detail: "routes to workers", kind: "transport" },
+        {
+          id: "route",
+          label: "Gateway",
+          detail: "routes to workers",
+          kind: "transport",
+        },
         { id: "worker", label: "Worker", detail: "OpenAI-compatible", kind: "compute" },
         { id: "meter", label: "Metering", detail: "tokens, spend", kind: "data" },
       ],
@@ -386,7 +444,8 @@ export const projects: Project[] = [
   {
     slug: "conductor",
     name: "Conductor",
-    kicker: "Agentic workflow control plane with an outbox pipeline and no message broker",
+    kicker:
+      "Agentic workflow control plane with an outbox pipeline and no message broker",
     domain: "Platform engineering",
     featured: false,
     context: "Personal project",
@@ -423,8 +482,18 @@ export const projects: Project[] = [
       caption: "Run event path",
       nodes: [
         { id: "api", label: "REST API", detail: "hexagonal core", kind: "app" },
-        { id: "outbox", label: "Outbox", detail: "same transaction", kind: "transport" },
-        { id: "relay", label: "In-process relay", detail: "no broker", kind: "compute" },
+        {
+          id: "outbox",
+          label: "Outbox",
+          detail: "same transaction",
+          kind: "transport",
+        },
+        {
+          id: "relay",
+          label: "In-process relay",
+          detail: "no broker",
+          kind: "compute",
+        },
         { id: "read", label: "CQRS read model", detail: "run history", kind: "data" },
       ],
     },
@@ -436,7 +505,8 @@ export const projects: Project[] = [
   {
     slug: "cascade",
     name: "Cascade",
-    kicker: "Governed data platform where humans, scripts and AI agents hit the same policy layer",
+    kicker:
+      "Governed data platform where humans, scripts and AI agents hit the same policy layer",
     domain: "Platform engineering",
     featured: false,
     context: "Personal project",
@@ -473,8 +543,18 @@ export const projects: Project[] = [
     architecture: {
       caption: "Governed query path",
       nodes: [
-        { id: "callers", label: "Human, script, agent", detail: "3 surfaces", kind: "client" },
-        { id: "bff", label: "REST, console, MCP", detail: "one entry each", kind: "transport" },
+        {
+          id: "callers",
+          label: "Human, script, agent",
+          detail: "3 surfaces",
+          kind: "client",
+        },
+        {
+          id: "bff",
+          label: "REST, console, MCP",
+          detail: "one entry each",
+          kind: "transport",
+        },
         { id: "policy", label: "Policy core", detail: "lifecycle gate", kind: "app" },
         { id: "data", label: "Serving views", detail: "PostgreSQL", kind: "data" },
       ],
@@ -489,7 +569,8 @@ export const projects: Project[] = [
   {
     slug: "eka",
     name: "Enterprise Knowledge Assistant",
-    kicker: "Production RAG with hybrid retrieval, streamed answers and inline citations",
+    kicker:
+      "Production RAG with hybrid retrieval, streamed answers and inline citations",
     domain: "AI systems",
     featured: false,
     context: "Personal project",
@@ -528,8 +609,18 @@ export const projects: Project[] = [
       caption: "Answer path",
       nodes: [
         { id: "q", label: "Query", detail: "tenant-scoped", kind: "client" },
-        { id: "hybrid", label: "Hybrid retrieval", detail: "vector + FTS", kind: "compute" },
-        { id: "rerank", label: "Fuse and re-rank", detail: "Redis cache", kind: "transport" },
+        {
+          id: "hybrid",
+          label: "Hybrid retrieval",
+          detail: "vector + FTS",
+          kind: "compute",
+        },
+        {
+          id: "rerank",
+          label: "Fuse and re-rank",
+          detail: "Redis cache",
+          kind: "transport",
+        },
         { id: "gen", label: "Generation", detail: "SSE stream", kind: "app" },
         { id: "cite", label: "Grounding rail", detail: "passage links", kind: "data" },
       ],
@@ -542,7 +633,8 @@ export const projects: Project[] = [
   {
     slug: "intelligent-bistro",
     name: "The Intelligent Bistro",
-    kicker: "Natural-language restaurant ordering where the LLM never touches the prices",
+    kicker:
+      "Natural-language restaurant ordering where the LLM never touches the prices",
     domain: "AI systems",
     featured: false,
     context: "Personal project",
@@ -586,8 +678,18 @@ export const projects: Project[] = [
       nodes: [
         { id: "app", label: "Mobile app", detail: "Expo, Zustand", kind: "client" },
         { id: "api", label: "Express API", detail: "rate limited", kind: "app" },
-        { id: "llm", label: "LLM tool call", detail: "one function", kind: "transport" },
-        { id: "resolve", label: "Fuzzy resolver", detail: "canonical IDs", kind: "compute" },
+        {
+          id: "llm",
+          label: "LLM tool call",
+          detail: "one function",
+          kind: "transport",
+        },
+        {
+          id: "resolve",
+          label: "Fuzzy resolver",
+          detail: "canonical IDs",
+          kind: "compute",
+        },
         { id: "cart", label: "Cart", detail: "trusted pricing", kind: "data" },
       ],
     },
@@ -598,7 +700,8 @@ export const projects: Project[] = [
   {
     slug: "meridian",
     name: "Meridian",
-    kicker: "Multi-tenant B2B SaaS with tenant isolation enforced by the database itself",
+    kicker:
+      "Multi-tenant B2B SaaS with tenant isolation enforced by the database itself",
     domain: "Products",
     featured: false,
     context: "Personal project",
@@ -637,7 +740,12 @@ export const projects: Project[] = [
       caption: "Tenant-scoped request",
       nodes: [
         { id: "browser", label: "Browser", detail: "httpOnly cookies", kind: "client" },
-        { id: "bff", label: "Next.js BFF", detail: "no CORS surface", kind: "transport" },
+        {
+          id: "bff",
+          label: "Next.js BFF",
+          detail: "no CORS surface",
+          kind: "transport",
+        },
         { id: "api", label: "NestJS API", detail: "guards, RBAC", kind: "app" },
         { id: "rls", label: "PostgreSQL RLS", detail: "restricted role", kind: "data" },
       ],
@@ -693,7 +801,12 @@ export const projects: Project[] = [
       nodes: [
         { id: "client", label: "Client", detail: "React 19", kind: "client" },
         { id: "app", label: "Next.js 15", detail: "auth, RBAC", kind: "app" },
-        { id: "socket", label: "Socket.IO", detail: "polling fallback", kind: "transport" },
+        {
+          id: "socket",
+          label: "Socket.IO",
+          detail: "polling fallback",
+          kind: "transport",
+        },
         { id: "orm", label: "Prisma", detail: "7-table schema", kind: "compute" },
         { id: "db", label: "TiDB MySQL", detail: "distributed", kind: "data" },
       ],

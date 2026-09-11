@@ -18,8 +18,7 @@ export const profile: Profile = {
   status: "MS Computer Science, Northeastern, graduating December 2026",
   // CONFLICT: LinkedIn headline says "Open to 2027 New Grad Roles" while the
   // summary says graduating December 2026. Phrased here without a year.
-  seeking:
-    "Open to software engineer, SDE, full-stack, backend and frontend roles",
+  seeking: "Open to software engineer, SDE, full-stack, backend and frontend roles",
   emails: {
     personal: "talifpathan13@gmail.com",
     academic: "pathan.t@northeastern.edu",

@@ -13,13 +13,12 @@ export function StatusDot({
   tone?: "ok" | "warn" | "neutral";
   className?: string;
 }) {
-  const toneClass =
-    tone === "ok" ? "bg-ok" : tone === "warn" ? "bg-warn" : "bg-faint";
+  const toneClass = tone === "ok" ? "bg-ok" : tone === "warn" ? "bg-warn" : "bg-faint";
 
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 text-xs text-muted mono",
+        "mono inline-flex items-center gap-2 text-xs text-muted",
         className,
       )}
     >

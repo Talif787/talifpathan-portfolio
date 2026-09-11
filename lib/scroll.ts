@@ -84,7 +84,8 @@ export function scrollToSection(id: string, smooth = true): void {
   let lastScrollY = window.scrollY;
   let stillFrames = 0;
   let settledFrames = 0;
-  let phase: "animating" | "correcting" = behavior === "smooth" ? "animating" : "correcting";
+  let phase: "animating" | "correcting" =
+    behavior === "smooth" ? "animating" : "correcting";
 
   const tick = () => {
     if (cancelled) {

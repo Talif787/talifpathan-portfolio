@@ -7,23 +7,23 @@ because nobody reads it during an actual incident.
 
 ## Severity
 
-| Sev | Definition | Response | Example |
-|---|---|---|---|
-| **SEV1** | Site unreachable or serving the wrong content | Same day | Vercel edge outage, a deployment that renders blank |
-| **SEV2** | Site up, something material broken | Within a few days | All project links 404, OG image stopped rendering, CSP breaking a client island |
-| **SEV3** | Cosmetic or partial | Next change | One dead demo link, a filter count wrong, an animation not running on one browser |
+| Sev      | Definition                                    | Response          | Example                                                                           |
+| -------- | --------------------------------------------- | ----------------- | --------------------------------------------------------------------------------- |
+| **SEV1** | Site unreachable or serving the wrong content | Same day          | Vercel edge outage, a deployment that renders blank                               |
+| **SEV2** | Site up, something material broken            | Within a few days | All project links 404, OG image stopped rendering, CSP breaking a client island   |
+| **SEV3** | Cosmetic or partial                           | Next change       | One dead demo link, a filter count wrong, an animation not running on one browser |
 
 There is no SEV0. Nothing here can lose customer data or money, because there is
 neither.
 
 ## Detection
 
-| Source | Latency | Covers |
-|---|---|---|
-| `synthetic.yml`, every 30 min | up to 30 min | routes, headers, content, SEO, TTFB |
-| `deploy-verify.yml`, per deployment | immediate | regressions at the moment they ship |
-| Vercel dashboard and status page | manual | platform-level outages |
-| A person telling you | unbounded | everything else |
+| Source                              | Latency      | Covers                              |
+| ----------------------------------- | ------------ | ----------------------------------- |
+| `synthetic.yml`, every 30 min       | up to 30 min | routes, headers, content, SEO, TTFB |
+| `deploy-verify.yml`, per deployment | immediate    | regressions at the moment they ship |
+| Vercel dashboard and status page    | manual       | platform-level outages              |
+| A person telling you                | unbounded    | everything else                     |
 
 **The honest limitation:** a 30-minute cron cannot see a 4-minute outage, and a
 failed workflow emails you rather than paging you. Sub-minute detection with

@@ -2,10 +2,10 @@
 
 ## Objectives
 
-| Metric | Target | Why it is achievable |
-|---|---|---|
-| **RPO** | **0** | Git is the only store of record. There is no runtime state, no database, no uploads, no user data. Anything committed is safe; anything uncommitted was never part of the system. |
-| **RTO** | **~15 minutes** | Rebuilding production is: import the repo into a hosting platform, set one environment variable, deploy. |
+| Metric  | Target          | Why it is achievable                                                                                                                                                              |
+| ------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **RPO** | **0**           | Git is the only store of record. There is no runtime state, no database, no uploads, no user data. Anything committed is safe; anything uncommitted was never part of the system. |
+| **RTO** | **~15 minutes** | Rebuilding production is: import the repo into a hosting platform, set one environment variable, deploy.                                                                          |
 
 These numbers are unusually good, and the reason is worth stating plainly: the
 system has no state. Most disaster recovery difficulty is data recovery, and
@@ -14,15 +14,15 @@ recovery design; read them as evidence of a small system.
 
 ## What is where
 
-| Asset | Primary | Backup | Recoverable? |
-|---|---|---|---|
-| Source code | GitHub | Every local clone; the delivered ZIP | Yes |
-| Content (all copy and data) | `content/` in Git | same | Yes |
-| Build output | Vercel | Reproducible from source | Yes, by rebuilding |
-| Deployment history | Vercel | none | No, and it does not matter |
-| Environment config | Vercel dashboard | Documented in `ENVIRONMENT_VARIABLES.md` | Yes, one variable |
-| Secrets | none exist | n/a | n/a |
-| DNS | Vercel-managed `.vercel.app` | n/a | Reassigned on redeploy |
+| Asset                       | Primary                      | Backup                                   | Recoverable?               |
+| --------------------------- | ---------------------------- | ---------------------------------------- | -------------------------- |
+| Source code                 | GitHub                       | Every local clone; the delivered ZIP     | Yes                        |
+| Content (all copy and data) | `content/` in Git            | same                                     | Yes                        |
+| Build output                | Vercel                       | Reproducible from source                 | Yes, by rebuilding         |
+| Deployment history          | Vercel                       | none                                     | No, and it does not matter |
+| Environment config          | Vercel dashboard             | Documented in `ENVIRONMENT_VARIABLES.md` | Yes, one variable          |
+| Secrets                     | none exist                   | n/a                                      | n/a                        |
+| DNS                         | Vercel-managed `.vercel.app` | n/a                                      | Reassigned on redeploy     |
 
 **Nothing in this system is irrecoverable from a Git clone.** That is the whole
 recovery story.
@@ -99,10 +99,10 @@ That is a real off-platform backup and it costs nothing.
 
 ## Test schedule
 
-| Test | Frequency | How |
-|---|---|---|
-| Restore from clone | quarterly | clone to a temp dir, `npm ci && npm run build` |
-| Cloudflare Pages failover | **once, soon** | deploy to Pages, smoke test, delete the project |
-| Rollback | whenever you deploy | promote the previous deployment, smoke, promote back |
+| Test                      | Frequency           | How                                                  |
+| ------------------------- | ------------------- | ---------------------------------------------------- |
+| Restore from clone        | quarterly           | clone to a temp dir, `npm ci && npm run build`       |
+| Cloudflare Pages failover | **once, soon**      | deploy to Pages, smoke test, delete the project      |
+| Rollback                  | whenever you deploy | promote the previous deployment, smoke, promote back |
 
 The Cloudflare failover is the one that matters. Do it while everything is fine.

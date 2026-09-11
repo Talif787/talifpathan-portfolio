@@ -30,10 +30,10 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-xl flex flex-col gap-xs border-t border-line-faint pt-l md:flex-row md:items-center md:justify-between">
-          <p className="text-2xs mono text-faint">
+          <p className="mono text-2xs text-faint">
             {year} {profile.name}
           </p>
-          <p className="text-2xs mono text-faint">
+          <p className="mono text-2xs text-faint">
             Built with Next.js, Tailwind CSS and Motion
           </p>
         </div>

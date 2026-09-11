@@ -130,7 +130,7 @@ export function SiteHeader() {
         >
           <a
             href="#top"
-            className="rounded-inline text-xs mono tracking-tight text-ink"
+            className="mono rounded-inline text-xs tracking-tight text-ink"
           >
             {profile.name}
           </a>
@@ -179,7 +179,7 @@ export function SiteHeader() {
           >
             <Command aria-hidden className="size-3.5" />
             <span className="md:hidden">Menu</span>
-            <span className="hidden md:inline mono">K</span>
+            <span className="mono hidden md:inline">K</span>
           </button>
         </nav>
       </header>

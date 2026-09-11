@@ -33,7 +33,8 @@ export function Hero() {
             "linear-gradient(to right, var(--c-line-faint) 1px, transparent 1px), linear-gradient(to bottom, var(--c-line-faint) 1px, transparent 1px)",
           backgroundSize: "clamp(3rem, 6vw, 5.5rem) clamp(3rem, 6vw, 5.5rem)",
           maskImage: "radial-gradient(120% 80% at 50% 0%, #000 20%, transparent 78%)",
-          WebkitMaskImage: "radial-gradient(120% 80% at 50% 0%, #000 20%, transparent 78%)",
+          WebkitMaskImage:
+            "radial-gradient(120% 80% at 50% 0%, #000 20%, transparent 78%)",
         }}
       />
 
@@ -44,7 +45,7 @@ export function Hero() {
             className="flex flex-wrap items-center gap-x-l gap-y-xs"
           >
             <StatusDot label={profile.seeking} />
-            <span className="text-2xs mono text-faint">{profile.location}</span>
+            <span className="mono text-2xs text-faint">{profile.location}</span>
           </div>
 
           <h1
@@ -96,7 +97,10 @@ export function Hero() {
           </div>
 
           {flagship ? (
-            <div style={{ "--i": 6 } as React.CSSProperties} className="mt-xl w-full max-w-3xl">
+            <div
+              style={{ "--i": 6 } as React.CSSProperties}
+              className="mt-xl w-full max-w-3xl"
+            >
               <ArchitectureFlow
                 caption={`${flagship.name}: ${flagship.architecture.caption.toLowerCase()}`}
                 nodes={flagship.architecture.nodes}

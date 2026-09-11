@@ -118,10 +118,7 @@ export type ContributionGroup = {
 
 /** Filter grouping. Each project belongs to exactly one, so counts stay honest. */
 export type ProjectDomain =
-  | "Distributed systems"
-  | "Platform engineering"
-  | "AI systems"
-  | "Products";
+  "Distributed systems" | "Platform engineering" | "AI systems" | "Products";
 
 export type Project = {
   slug: string;

@@ -5,14 +5,14 @@ default, a small motion system, and a content layer that is separate from the UI
 
 ## Stack
 
-| Concern    | Choice                                            |
-| ---------- | ------------------------------------------------- |
-| Framework  | Next.js 14, App Router                            |
-| Language   | TypeScript, strict                                |
-| Styling    | Tailwind CSS 3.4 over CSS custom-property tokens  |
-| Motion     | CSS first, Motion (`motion/react`) where needed   |
-| Icons      | lucide-react                                      |
-| Deployment | Vercel                                            |
+| Concern    | Choice                                           |
+| ---------- | ------------------------------------------------ |
+| Framework  | Next.js 14, App Router                           |
+| Language   | TypeScript, strict                               |
+| Styling    | Tailwind CSS 3.4 over CSS custom-property tokens |
+| Motion     | CSS first, Motion (`motion/react`) where needed  |
+| Icons      | lucide-react                                     |
+| Deployment | Vercel                                           |
 
 ## Run it
 
@@ -118,15 +118,15 @@ after, or canonical URLs, `sitemap.xml` and Open Graph tags will say localhost.
 
 Full detail in `docs/`:
 
-| Document | Covers |
-|---|---|
-| `DEPLOY-WALKTHROUGH.md` | **Start here.** Copy-paste sequence with every exact value |
-| `DEPLOYMENT.md` | Platform choice, pipeline, security, cost, checklist, first 24 hours |
-| `ARCHITECTURE.md` | Dependency map, request path, why Vercel, failure behaviour |
-| `ENVIRONMENT_VARIABLES.md` | The one variable, per environment |
-| `RUNBOOK.md` | Ship, verify, roll back, update dependencies |
-| `INCIDENT_RESPONSE.md` | Severity, detection, playbooks |
-| `DISASTER_RECOVERY.md` | RPO 0, RTO ~15 min, Cloudflare Pages failover |
+| Document                   | Covers                                                               |
+| -------------------------- | -------------------------------------------------------------------- |
+| `DEPLOY-WALKTHROUGH.md`    | **Start here.** Copy-paste sequence with every exact value           |
+| `DEPLOYMENT.md`            | Platform choice, pipeline, security, cost, checklist, first 24 hours |
+| `ARCHITECTURE.md`          | Dependency map, request path, why Vercel, failure behaviour          |
+| `ENVIRONMENT_VARIABLES.md` | The one variable, per environment                                    |
+| `RUNBOOK.md`               | Ship, verify, roll back, update dependencies                         |
+| `INCIDENT_RESPONSE.md`     | Severity, detection, playbooks                                       |
+| `DISASTER_RECOVERY.md`     | RPO 0, RTO ~15 min, Cloudflare Pages failover                        |
 
 ## Operational scripts
 

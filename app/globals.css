@@ -85,12 +85,12 @@
        Durations are graded by interaction class. Anything the pointer
        touches resolves inside 200ms; anything that moves layout is allowed
        longer because the user needs to follow it.                         */
-    --dur-micro: 110ms;   /* icon nudge, colour shift */
-    --dur-press: 90ms;    /* button depress */
-    --dur-ui: 180ms;      /* hover, focus ring, chip */
-    --dur-card: 300ms;    /* card lift, metadata reveal */
-    --dur-panel: 420ms;   /* disclosure, dialog */
-    --dur-scene: 700ms;   /* one-time entrance */
+    --dur-micro: 110ms; /* icon nudge, colour shift */
+    --dur-press: 90ms; /* button depress */
+    --dur-ui: 180ms; /* hover, focus ring, chip */
+    --dur-card: 300ms; /* card lift, metadata reveal */
+    --dur-panel: 420ms; /* disclosure, dialog */
+    --dur-scene: 700ms; /* one-time entrance */
 
     /* Entrance decelerates hard, exit accelerates away: different curves so
        appearing and disappearing do not feel like the same event reversed. */
@@ -98,8 +98,18 @@
     --ease-exit: cubic-bezier(0.5, 0, 0.75, 0);
     --ease-standard: cubic-bezier(0.2, 0, 0, 1);
     --ease-emphasis: linear(
-      0, 0.402 7.4%, 0.711 15.3%, 0.929 23.7%, 1.008 28.2%, 1.067 33.1%,
-      1.099 38.6%, 1.104 43.6%, 1.09 49.4%, 1.023 68.1%, 0.999 85.4%, 1
+      0,
+      0.402 7.4%,
+      0.711 15.3%,
+      0.929 23.7%,
+      1.008 28.2%,
+      1.067 33.1%,
+      1.099 38.6%,
+      1.104 43.6%,
+      1.09 49.4%,
+      1.023 68.1%,
+      0.999 85.4%,
+      1
     );
 
     --header-h: 3.75rem;
@@ -131,12 +141,19 @@
     -webkit-font-smoothing: antialiased;
     /* Atmosphere: two very low-contrast radials, no floating blobs. */
     background-image:
-      radial-gradient(80rem 40rem at 78% -10%, rgb(242 178 92 / 0.045), transparent 60%),
+      radial-gradient(
+        80rem 40rem at 78% -10%,
+        rgb(242 178 92 / 0.045),
+        transparent 60%
+      ),
       radial-gradient(60rem 36rem at 4% 8%, rgb(111 191 180 / 0.035), transparent 62%);
     background-attachment: fixed;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-weight: 500;
     letter-spacing: -0.022em;
     line-height: 1.12;
@@ -163,8 +180,13 @@
     color: var(--c-text);
   }
 
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: var(--c-base-deep); }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--c-base-deep);
+  }
   ::-webkit-scrollbar-thumb {
     background: var(--c-surface-raised);
     border-radius: var(--r-chip);
@@ -214,7 +236,9 @@
     -webkit-backdrop-filter: blur(14px) saturate(150%);
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .glass { background: var(--c-surface); }
+    .glass {
+      background: var(--c-surface);
+    }
   }
 
   /* ---- Section header rail ---------------------------------------------- */
@@ -224,7 +248,10 @@
     grid-template-columns: 1fr;
   }
   @media (min-width: 60rem) {
-    .rail { grid-template-columns: 16rem minmax(0, 1fr); gap: var(--space-2xl); }
+    .rail {
+      grid-template-columns: 16rem minmax(0, 1fr);
+      gap: var(--space-2xl);
+    }
   }
 
   .rail-mark {
@@ -278,7 +305,9 @@
     color: var(--c-text-faint);
     font-variant-numeric: tabular-nums;
   }
-  .chip[aria-pressed="true"] .chip-count { color: var(--c-accent); }
+  .chip[aria-pressed="true"] .chip-count {
+    color: var(--c-accent);
+  }
 
   /* ---- Architecture diagram ---------------------------------------------
      The one recurring motion idea on this site: a pulse travelling along a
@@ -314,9 +343,15 @@
     background: var(--c-base-deep);
     min-inline-size: 0;
   }
-  .flow-node[data-kind="data"] { border-color: rgb(111 191 180 / 0.34); }
-  .flow-node[data-kind="transport"] { border-color: var(--c-accent-line); }
-  .flow-node[data-kind="compute"] { border-color: rgb(148 168 196 / 0.34); }
+  .flow-node[data-kind="data"] {
+    border-color: rgb(111 191 180 / 0.34);
+  }
+  .flow-node[data-kind="transport"] {
+    border-color: var(--c-accent-line);
+  }
+  .flow-node[data-kind="compute"] {
+    border-color: rgb(148 168 196 / 0.34);
+  }
 
   .flow-node-label {
     display: block;
@@ -375,21 +410,39 @@
   }
 
   @keyframes flow-down {
-    0%   { transform: translateY(-120%); opacity: 0; }
-    35%  { opacity: 1; }
-    100% { transform: translateY(240%); opacity: 0; }
+    0% {
+      transform: translateY(-120%);
+      opacity: 0;
+    }
+    35% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(240%);
+      opacity: 0;
+    }
   }
   @keyframes flow-right {
-    0%   { transform: translateX(-120%); opacity: 0; }
-    35%  { opacity: 1; }
-    100% { transform: translateX(240%); opacity: 0; }
+    0% {
+      transform: translateX(-120%);
+      opacity: 0;
+    }
+    35% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(240%);
+      opacity: 0;
+    }
   }
 
   /* ---- Scroll progress ---------------------------------------------------
      Native scroll-driven animation. Zero JavaScript, zero scroll listeners.
      Hidden entirely where unsupported rather than shipping a JS fallback for
      a purely decorative affordance.                                        */
-  .scroll-progress { display: none; }
+  .scroll-progress {
+    display: none;
+  }
   @supports (animation-timeline: scroll()) {
     .scroll-progress {
       display: block;
@@ -404,8 +457,12 @@
       animation-timeline: scroll(root block);
     }
     @keyframes progress-scale {
-      from { transform: scaleX(0); }
-      to   { transform: scaleX(1); }
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
     }
   }
 
@@ -427,15 +484,18 @@
     transform-origin: 0 50%;
     transition: transform var(--dur-ui) var(--ease-standard);
   }
-  .link-underline:where(:hover, :focus-visible)::after { transform: scaleX(1); }
-
+  .link-underline:where(:hover, :focus-visible)::after {
+    transform: scaleX(1);
+  }
 
   /* ---- Section entrance --------------------------------------------------
      One fade and 14px of rise, resolved against the view timeline so it needs
      no JavaScript. Elements are visible by default; the animation only ever
      runs where the browser supports it, so an unsupported browser shows the
      finished state rather than blank space.                                */
-  .reveal { opacity: 1; }
+  .reveal {
+    opacity: 1;
+  }
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
       .reveal {
@@ -444,8 +504,14 @@
         animation-range: entry 10% cover 26%;
       }
       @keyframes reveal-in {
-        from { opacity: 0; transform: translateY(14px); }
-        to   { opacity: 1; transform: none; }
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
       }
     }
   }
@@ -459,13 +525,20 @@
     animation-delay: calc(var(--i, 0) * 70ms + 60ms);
   }
   @keyframes enter-rise {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: none; }
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
-    .enter-seq > * { animation: none; }
+    .enter-seq > * {
+      animation: none;
+    }
   }
-
 
   /* ---- Metric strip ------------------------------------------------------
      Figures that trace to a documented fact. Hairline separators rather than
@@ -478,14 +551,18 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   @media (min-width: 48rem) {
-    .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .metrics {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
   .metric {
     background: var(--c-base);
     padding-block: var(--space-m);
     padding-inline: var(--space-m);
   }
-  .metric:first-child { padding-inline-start: 0; }
+  .metric:first-child {
+    padding-inline-start: 0;
+  }
   .metric-value {
     display: block;
     font-size: var(--step-2);
@@ -504,7 +581,10 @@
   /* ---- Transcript table --------------------------------------------------
      A real table, because coursework is tabular data. Collapses to stacked
      rows on narrow screens without losing the header association.           */
-  .courses { inline-size: 100%; border-collapse: collapse; }
+  .courses {
+    inline-size: 100%;
+    border-collapse: collapse;
+  }
   .courses th {
     text-align: start;
     font-weight: 400;
@@ -520,13 +600,17 @@
     color: var(--c-text-muted);
     vertical-align: baseline;
   }
-  .courses tr:last-child td { border-block-end: 0; }
+  .courses tr:last-child td {
+    border-block-end: 0;
+  }
   .courses .course-code {
     font-family: var(--font-mono), ui-monospace, monospace;
     color: var(--c-text-faint);
     white-space: nowrap;
   }
-  .courses .course-title { color: var(--c-text); }
+  .courses .course-title {
+    color: var(--c-text);
+  }
   .courses .course-grade {
     font-family: var(--font-mono), ui-monospace, monospace;
     color: var(--c-accent);
@@ -534,13 +618,43 @@
     white-space: nowrap;
   }
   @media (max-width: 40rem) {
-    .courses thead { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
-    .courses tr { display: grid; grid-template-columns: 1fr auto; gap: 0 var(--space-s); padding-block: var(--space-s); border-block-end: 1px solid var(--c-line-faint); }
-    .courses td { border: 0; padding-block: 0; }
-    .courses .course-code { grid-column: 1; grid-row: 1; }
-    .courses .course-title { grid-column: 1; grid-row: 2; }
-    .courses .course-term { grid-column: 1; grid-row: 3; font-size: var(--step--2); color: var(--c-text-faint); }
-    .courses .course-grade { grid-column: 2; grid-row: 1 / 4; align-self: center; }
+    .courses thead {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+    .courses tr {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0 var(--space-s);
+      padding-block: var(--space-s);
+      border-block-end: 1px solid var(--c-line-faint);
+    }
+    .courses td {
+      border: 0;
+      padding-block: 0;
+    }
+    .courses .course-code {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .courses .course-title {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .courses .course-term {
+      grid-column: 1;
+      grid-row: 3;
+      font-size: var(--step--2);
+      color: var(--c-text-faint);
+    }
+    .courses .course-grade {
+      grid-column: 2;
+      grid-row: 1 / 4;
+      align-self: center;
+    }
   }
 
   /* ---- Scroll to top -----------------------------------------------------
@@ -576,7 +690,9 @@
     transform: translateY(-2px);
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .to-top { background: var(--c-surface); }
+    .to-top {
+      background: var(--c-surface);
+    }
   }
 
   /* ---- Role list ---------------------------------------------------------
@@ -591,18 +707,26 @@
   }
 
   /* ---- Prose measure ---------------------------------------------------- */
-  .measure { max-inline-size: var(--measure); }
-  .measure-tight { max-inline-size: 46ch; }
+  .measure {
+    max-inline-size: var(--measure);
+  }
+  .measure-tight {
+    max-inline-size: 46ch;
+  }
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
+  .text-balance {
+    text-wrap: balance;
+  }
   .mono {
     font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
     font-feature-settings: "ss01" on;
   }
   /* Applied only to elements that are mid-transform, never left on. */
-  .will-lift { will-change: transform; }
+  .will-lift {
+    will-change: transform;
+  }
 }
 
 /* ============================================================================
@@ -620,10 +744,20 @@
     --dur-scene: 1ms;
   }
 
-  .flow-link::after { animation: none; opacity: 0.55; transform: none; }
-  .scroll-progress { animation: none; transform: scaleX(1); opacity: 0.35; }
+  .flow-link::after {
+    animation: none;
+    opacity: 0.55;
+    transform: none;
+  }
+  .scroll-progress {
+    animation: none;
+    transform: scaleX(1);
+    opacity: 0.35;
+  }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;

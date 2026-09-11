@@ -30,7 +30,7 @@ export function Experience() {
                   <p className="mt-2xs text-xs text-muted">{org.detail}</p>
                 ) : null}
               </div>
-              <p className="text-2xs mono text-faint md:text-end">{org.period}</p>
+              <p className="mono text-2xs text-faint md:text-end">{org.period}</p>
             </header>
 
             <ol className="relative mt-l flex flex-col gap-l">
@@ -43,20 +43,20 @@ export function Experience() {
                   />
                   <div className="flex flex-col gap-2xs md:flex-row md:items-baseline md:justify-between md:gap-l">
                     <h4 className="text-lg text-ink">{role.title}</h4>
-                    <p className="shrink-0 text-2xs mono text-faint">{role.period}</p>
+                    <p className="mono shrink-0 text-2xs text-faint">{role.period}</p>
                   </div>
-                  <p className="mt-2xs text-2xs mono text-faint">
+                  <p className="mono mt-2xs text-2xs text-faint">
                     {role.term ? `${role.term}, ${role.location}` : role.location}
                   </p>
-                  <p className="mt-s measure text-base text-muted">{role.summary}</p>
+                  <p className="measure mt-s text-base text-muted">{role.summary}</p>
 
                   {role.contributions.length > 0 ? (
                     <Disclosure className="mt-m" openLabel="Contributions">
                       <div className="flex flex-col gap-l">
                         {role.contributions.map((group) => (
                           <div key={group.theme}>
-                            <h5 className="text-2xs mono text-accent">{group.theme}</h5>
-                            <ul className="mt-s measure space-y-s">
+                            <h5 className="mono text-2xs text-accent">{group.theme}</h5>
+                            <ul className="measure mt-s space-y-s">
                               {group.items.map((item) => (
                                 <li
                                   key={item}

@@ -258,7 +258,7 @@ export function CommandMenu({
                   return (
                     <li key={command.id}>
                       {showGroup ? (
-                        <p className="px-m pb-1 pt-m text-2xs mono text-faint">
+                        <p className="mono px-m pb-1 pt-m text-2xs text-faint">
                           {command.group}
                         </p>
                       ) : null}
@@ -280,7 +280,7 @@ export function CommandMenu({
                           {isCopied ? "Copied to clipboard" : command.label}
                         </span>
                         {command.hint ? (
-                          <span className="hidden text-2xs mono text-faint sm:inline">
+                          <span className="mono hidden text-2xs text-faint sm:inline">
                             {command.hint}
                           </span>
                         ) : null}

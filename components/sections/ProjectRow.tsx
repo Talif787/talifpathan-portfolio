@@ -74,8 +74,8 @@ export function ProjectRow({ project }: { project: Project }) {
       ) : null}
 
       {project.ownership ? (
-        <div className="mt-l measure border-t border-line-faint pt-m">
-          <h4 className="text-2xs mono text-faint">My part</h4>
+        <div className="measure mt-l border-t border-line-faint pt-m">
+          <h4 className="mono text-2xs text-faint">My part</h4>
           <p className="mt-2xs text-base text-muted">{project.ownership}</p>
           {project.collaborators?.length ? (
             <p className="mt-s text-xs text-faint">
@@ -94,16 +94,16 @@ export function ProjectRow({ project }: { project: Project }) {
   const head = (
     <div className="min-w-0">
       <div className="flex flex-wrap items-baseline gap-x-s gap-y-2xs">
-        <p className="text-2xs mono text-faint">
+        <p className="mono text-2xs text-faint">
           {project.period ? `${project.context}, ${project.period}` : project.context}
         </p>
-        {featured ? (
-          <p className="text-2xs mono text-accent">Featured</p>
-        ) : null}
+        {featured ? <p className="mono text-2xs text-accent">Featured</p> : null}
       </div>
-      <h3 className={cn("mt-2xs", featured ? "text-2xl" : "text-xl")}>{project.name}</h3>
+      <h3 className={cn("mt-2xs", featured ? "text-2xl" : "text-xl")}>
+        {project.name}
+      </h3>
       <p className="mt-2xs text-lg text-muted">{project.kicker}</p>
-      <p className="mt-m measure text-base text-muted">{project.problem}</p>
+      <p className="measure mt-m text-base text-muted">{project.problem}</p>
 
       {project.metrics ? (
         <MetricStrip
