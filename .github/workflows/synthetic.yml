@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Smoke test production
         run: bash scripts/smoke.sh "${{ vars.NEXT_PUBLIC_SITE_URL }}"
 
@@ -56,7 +56,7 @@ jobs:
     # transient 502 on someone else's demo is not an incident on yours.
     if: github.event.schedule == null || github.run_attempt == 1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Check all project and profile links
         run: npm run links
         continue-on-error: true
