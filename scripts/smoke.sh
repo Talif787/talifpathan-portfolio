@@ -46,14 +46,22 @@ if grep -qi '^x-powered-by:' <<< "$HEAD"; then bad "x-powered-by leaked"; else o
 
 echo
 echo "content"
-h1=$(grep -c '<h1' <<< "$HTML")
+# Count OCCURRENCES, not lines. Next.js ships minified HTML with everything on
+# a handful of lines, so `grep -c` reports 1 no matter how many matches there
+# are. That made the project-link assertion fail on a healthy page and made the
+# h1 assertion pass by luck.
+h1=$(grep -o '<h1' <<< "$HTML" | wc -l | tr -d ' ')
 check "exactly one h1" "$h1" "1"
-grep -q '<title>Talif Pathan' <<< "$HTML" && ok "title renders" || bad "title missing"
-grep -q 'application/ld\+json' <<< "$HTML" && ok "JSON-LD present" || bad "JSON-LD missing"
-projects=$(grep -c 'github.com/Talif787' <<< "$HTML")
-if [ "$projects" -ge 14 ]; then ok "project links rendered ($projects)"; else bad "only $projects project links, want >= 14"; fi
+grep -qF '<title>Talif Pathan' <<< "$HTML" && ok "title renders" || bad "title missing"
+# -F: the '+' in ld+json is literal. In a basic regex, \+ is the repetition
+# operator, so the old pattern searched for "ldjson" and never matched.
+grep -qF 'application/ld+json' <<< "$HTML" && ok "JSON-LD present" || bad "JSON-LD missing"
+projects=$(grep -o 'github\.com/Talif787/[A-Za-z0-9._-]*' <<< "$HTML" | sort -u | wc -l | tr -d ' ')
+if [ "$projects" -ge 14 ]; then ok "distinct project repos linked ($projects)"; else bad "only $projects distinct project repos, want >= 14"; fi
+demos=$(grep -o 'Open live demo\|>Live<' <<< "$HTML" | wc -l | tr -d ' ')
+if [ "$demos" -ge 10 ]; then ok "live demo links rendered ($demos)"; else bad "only $demos live demo links, want >= 10"; fi
 for id in projects experience skills education about contact recognition references; do
-  grep -q "id=\"$id\"" <<< "$HTML" && ok "anchor #$id" || bad "anchor #$id missing"
+  grep -qF "id=\"$id\"" <<< "$HTML" && ok "anchor #$id" || bad "anchor #$id missing"
 done
 
 echo
@@ -61,10 +69,11 @@ echo "layout stability"
 # content-visibility on sections once broke in-page navigation: hash offsets
 # were computed against placeholder heights, so a nav click landed in the
 # previous section. Assert the optimisation has not been reintroduced.
-if grep -q 'content-visibility' <<< "$(curl -sS --max-time 25 "$BASE/_next/static/css/"*.css 2>/dev/null || echo '')"; then
+css_url=$(grep -o '/_next/static/css/[^"]*\.css' <<< "$HTML" | head -1)
+if [ -n "$css_url" ] && curl -sS --max-time 25 "$BASE$css_url" | grep -qF 'content-visibility'; then
   bad "content-visibility present in shipped CSS (breaks anchor scrolling)"
 else
-  ok "no content-visibility in shipped CSS"
+  ok "no content-visibility in shipped CSS${css_url:+ ($css_url)}"
 fi
 
 echo
